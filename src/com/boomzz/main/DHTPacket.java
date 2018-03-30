@@ -36,6 +36,17 @@ public class DHTPacket {
 		map.put("a", a);
 		return Bencode.encode(map);
 	}
+	public static String getPeersBecode(String target){
+		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
+		map.put("t", "bz");
+		map.put("y", "q");
+		map.put("q", "get_peers");
+		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
+		a.put("id", DHTServer.NODE_ID);
+		a.put("info_hash",target);
+		map.put("a", a);
+		return Bencode.encode(map);
+	}
 	
 	public static String getReponseBecode(String receiveMsg){
 //		LinkedHashMap<String, Object> receiveMsgMap = (LinkedHashMap<String, Object>) Bencode.decode(receiveMsg);
