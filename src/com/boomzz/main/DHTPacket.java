@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import com.boomzz.main.bencode.Bencode;
+
 public class DHTPacket {
 
 	public static String getPingBecode(int type){
@@ -36,6 +38,7 @@ public class DHTPacket {
 		map.put("a", a);
 		return Bencode.encode(map);
 	}
+	
 	public static String getPeersBecode(String target){
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");

@@ -1,6 +1,7 @@
-package com.boomzz.main;
+package com.boomzz.main.bencode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,11 +26,13 @@ public class Bencode {
 		}
 		return null;
 	}
+	
 	private static String decodeStr = null;
 	public static Object decode(String encodeStr) {
 		Bencode.decodeStr = encodeStr;
 		return decodeParse(encodeStr);
 	}
+	
 	private static Object decodeParse(String encodeStr){
 		if(encodeStr.equals("")||encodeStr==null) {
 			return null;
@@ -63,6 +66,12 @@ public class Bencode {
 			Object key  = null;
 			while ((key = decodeParse(Bencode.decodeStr))!=null) {
 				Object value = decodeParse(Bencode.decodeStr);
+				if("ip".equals(key)) {
+					value = decodeIP(value.toString());
+				}
+				if("nodes".equals(key)) {
+					value = decodeNodes(value.toString());
+				}
 				hashMap.put(key.toString(), value);
 			}
 			return hashMap;
@@ -73,9 +82,11 @@ public class Bencode {
 	private static String encodeString(String value) {
 		return value.length()+":"+value;
 	}
+	
 	private static String encodeInteger(int value) {
 		return "i"+value+"e";
 	}
+	
 	private static String encodeMap(LinkedHashMap<String, Object> value) {
 		String str = "d";
 		for(Map.Entry<String, Object> m:value.entrySet()) {
@@ -83,12 +94,40 @@ public class Bencode {
 		}
 		return str+"e";
 	}
+	
 	private static String encodeList(ArrayList<Object> value) {
 		String str = "l";
 		for(Object object:value) {
 			str+= encode(object);
 		}
 		return str + "e";
+	}
+	
+	private static String decodeIP(String value) {
+		char[] charArray = value.toString().toCharArray();
+		value=(int)charArray[0]+".";
+		value+=(int)charArray[1]+".";
+		value+=(int)charArray[2]+".";
+		value+=(int)charArray[3]+":";
+		value+=(int)charArray[4]+""+(int)charArray[5];
+		return value;
+	}
+	private static List<HashMap<String, String>> decodeNodes(String value) {
+		char[] charArray = value.toCharArray();
+		int size = value.length()/26;
+		List<HashMap<String, String>> hashMap = new ArrayList<>();
+		for(int i=0;i<size;i++) {
+			HashMap<String, String> map = new HashMap<>();
+			char[] copy = Arrays.copyOfRange(charArray, i*26, i*26+26);
+			String cString = "";
+			for(char c:copy) {
+				cString+=c+"";
+			}
+			map.put("nodeId", cString.substring(0, 20));
+			map.put("ip", decodeIP(cString.substring(20, 26)));
+			hashMap.add(map);
+		}
+		return hashMap;
 	}
 	
 	public static void main(String[] args) {

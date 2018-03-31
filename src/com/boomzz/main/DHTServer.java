@@ -6,6 +6,8 @@ import java.net.DatagramSocket;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
+import com.boomzz.main.bencode.Bencode;
+
 public class DHTServer {
 
 	public static String NODE_ID = "2aa9df91320ea0260502";
