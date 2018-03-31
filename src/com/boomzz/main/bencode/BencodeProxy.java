@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 
 public class BencodeProxy {
 
-	public static void process(PushbackInputStream stream,LinkedHashMap<String,Object> hashMap) throws Exception {
+	public static Object process(PushbackInputStream stream,LinkedHashMap<String,Object> hashMap) throws Exception {
 		int head = stream.read();
 		stream.unread(head);
 		IBencode bencode = null;
@@ -24,7 +24,8 @@ public class BencodeProxy {
 				break;
 		}
 		if(bencode!=null) {
-			bencode.decode(stream, hashMap);
+			return bencode.decode(stream, hashMap);
 		}
+		return bencode;
 	}
 }
