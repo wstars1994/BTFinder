@@ -1,13 +1,13 @@
 package com.boomzz.main.bencode;
 
-import java.io.IOException;
 import java.io.PushbackInputStream;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class BencodeProxy {
 
-	public static void process(PushbackInputStream stream,HashMap<String,Object> hashMap) throws IOException {
+	public static void process(PushbackInputStream stream,LinkedHashMap<String,Object> hashMap) throws Exception {
 		int head = stream.read();
+		stream.unread(head);
 		IBencode bencode = null;
 		switch (head) {
 			case 100://d Map
@@ -23,7 +23,7 @@ public class BencodeProxy {
 				bencode = new BencodeString();
 				break;
 		}
-		if(bencode!=null) {
+		while(bencode!=null) {
 			bencode.decode(stream, hashMap);
 		}
 	}

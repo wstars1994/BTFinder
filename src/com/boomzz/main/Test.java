@@ -6,7 +6,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import com.boomzz.main.bencode.BencodeProxy;
 
@@ -31,7 +31,7 @@ public class Test {
             byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
             ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
             PushbackInputStream stream = new PushbackInputStream(byteArry);
-            HashMap<String, Object> map =new HashMap<String, Object>();
+            LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();
             BencodeProxy.process(stream,map);
             socket.close();
 		} catch (Exception e) {

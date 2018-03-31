@@ -15,13 +15,12 @@
 package com.boomzz.main.bencode;
 
 import java.io.PushbackInputStream;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class BecodeInteger implements IBencode{
 
-	public void decode(PushbackInputStream stream, HashMap<String, Object> hashMap){
-		
-		
+	public String decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap){
+		return null;
 	}
 	
 }
