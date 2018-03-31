@@ -26,6 +26,6 @@ public class BencodeProxy {
 		if(bencode!=null) {
 			return bencode.decode(stream, hashMap);
 		}
-		return bencode;
+		return null;
 	}
 }
