@@ -23,7 +23,7 @@ public class BencodeProxy {
 				bencode = new BencodeString();
 				break;
 		}
-		while(bencode!=null) {
+		if(bencode!=null) {
 			bencode.decode(stream, hashMap);
 		}
 	}
