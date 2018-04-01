@@ -29,6 +29,10 @@ public class Test {
             int i=data.length-1;
             for(;i>0;i--) if(data[i]!=0) break;
             byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
+            for(byte b:copyByte) {
+            	System.out.print((char)b);
+            }
+            System.out.println();
             ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
             PushbackInputStream stream = new PushbackInputStream(byteArry);
             LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();

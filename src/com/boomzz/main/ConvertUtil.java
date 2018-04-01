@@ -14,13 +14,10 @@
  */
 package com.boomzz.main;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ConvertUtil {
 
-	public static List<String> bytesToHexString(byte[] src) {
-		List<String> convertList = new ArrayList<>();
+	public static String bytesToHexString(byte[] src) {
+		StringBuilder builder = new StringBuilder();
 		if (src == null || src.length <= 0) {
 			return null;
 		}
@@ -28,11 +25,11 @@ public class ConvertUtil {
 			int v = src[i] & 0xFF;
 			String hv = Integer.toHexString(v);
 			if (hv.length() < 2) {
-				convertList.add("0");
+				builder.append(0);
 			}
-			convertList.add(hv);
+			builder.append(hv);
 		}
-		return convertList;
+		return builder.toString();
 	}
 
 	/**

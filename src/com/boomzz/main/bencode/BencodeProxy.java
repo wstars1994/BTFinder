@@ -7,7 +7,6 @@ public class BencodeProxy {
 
 	public static Object process(PushbackInputStream stream,LinkedHashMap<String,Object> hashMap) throws Exception {
 		int head = stream.read();
-		stream.unread(head);
 		IBencode bencode = null;
 		switch (head) {
 			case 100://d Map
@@ -20,7 +19,7 @@ public class BencodeProxy {
 				bencode = new BencodeList();
 				break;
 			default://[0-9]+       String
-				bencode = new BencodeString();
+				bencode = new BencodeString(head);
 				break;
 		}
 		if(bencode!=null) {
