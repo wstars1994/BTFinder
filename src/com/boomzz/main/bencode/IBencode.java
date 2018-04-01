@@ -14,7 +14,11 @@ public interface IBencode {
 	public static Object specialValueDecode(String key,Object objValues) {
 		switch (key) {
 			case "ip":
-				byte values[]=objValues.toString().getBytes();
+				char []cs = objValues.toString().toCharArray();
+				byte values[]=new byte[cs.length];
+				for(int i=0;i<cs.length;i++) {
+					values[i] = (byte)((int)cs[i]);
+				}
 				//一共6个字节 前四个为IP后两个为port
 				byte ip[] = Arrays.copyOfRange(values, 0, 4);
 				byte port[] = Arrays.copyOfRange(values, 4, 6);
