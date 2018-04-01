@@ -8,7 +8,7 @@ import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
-import com.boomzz.main.bencode.BencodeProxy;
+import com.boomzz.main.bencode.Bencode;
 
 public class Test {
 
@@ -20,8 +20,8 @@ public class Test {
 		try {
 			socket = new DatagramSocket();
 			socket.setSoTimeout(5000);
-			String pac = DHTPacket.getPeersBecode("6a6e224a9f643785a53bdeebfb5b1e6e7e92f4ea".toUpperCase());
-			DatagramPacket request = new DatagramPacket(pac.getBytes(),pac.getBytes().length,InetAddress.getByName("router.bittorrent.com"),6881);
+			String pac = DHTPacket.getFindNodeBecode("07f733e9806302b968cbb79e80c0caf36c6bfb1e");
+			DatagramPacket request = new DatagramPacket(pac.getBytes(),pac.getBytes().length,InetAddress.getByName("api.boomzz.com"),6666);
 			socket.send(request);
             DatagramPacket response = new DatagramPacket(new byte[1024], 1024);
             socket.receive(response);
@@ -29,14 +29,17 @@ public class Test {
             int i=data.length-1;
             for(;i>0;i--) if(data[i]!=0) break;
             byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
-            for(byte b:copyByte) {
-            	System.out.print((char)b);
-            }
-            System.out.println();
             ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
             PushbackInputStream stream = new PushbackInputStream(byteArry);
             LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();
-            BencodeProxy.process(stream,map);
+            Bencode.process(stream,map);
+            System.out.println(map);
+            LinkedHashMap<String, Object> r = (LinkedHashMap<String, Object>) map.get("r");
+            String nodeStr = (String) r.get("nodes");
+            String[] split = nodeStr.split("#");
+            for(String str:split) {
+            	System.out.println(str.split("/")[1]);
+            }
             socket.close();
 		} catch (Exception e) {
 			e.printStackTrace();

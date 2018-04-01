@@ -17,10 +17,21 @@ package com.boomzz.main.bencode;
 import java.io.PushbackInputStream;
 import java.util.LinkedHashMap;
 
-public class BecodeInteger implements IBencode{
+import com.boomzz.main.bencode.model.ObjectBytesModel;
 
-	public String decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap){
+public class BencodeInteger implements IBencode{
+
+	@Override
+	public ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap){
+		
+		
+		
 		return null;
+	}
+
+	@Override
+	public String encode(Object object) {
+		return "i"+object+"e";
 	}
 	
 }
