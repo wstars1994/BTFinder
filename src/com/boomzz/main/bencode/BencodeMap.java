@@ -34,11 +34,12 @@ public class BencodeMap extends AbstractBencode {
 	public byte[] encode(Object object) {
 		LinkedHashMap<String, Object> hashMap = (LinkedHashMap<String, Object>) object;
 		String str = "d";
-		byte bytes[] = str.getBytes();
+		byte bytes[] = {};
 		for(Map.Entry<String, Object> m:hashMap.entrySet()) {
 			 byte[] key = AbstractBencode.encodeRouter(m.getKey());
 			 byte[] value = AbstractBencode.encodeRouter(m.getValue());
-			 bytes = Arrays.copyOf(key, bytes.length+key.length);
+			 byte newByte[] = new byte[key.length+value.length];
+			 System.arraycopy(key, 0, newByte, 0, key.length);
 			 bytes = Arrays.copyOf(value, bytes.length+value.length);
 		}
 		return bytes;
