@@ -40,6 +40,7 @@ public class BencodeMap extends AbstractBencode {
 			 byte[] value = AbstractBencode.encodeRouter(m.getValue());
 			 byte newByte[] = new byte[key.length+value.length];
 			 System.arraycopy(key, 0, newByte, 0, key.length);
+			 
 			 bytes = Arrays.copyOf(value, bytes.length+value.length);
 		}
 		return bytes;
