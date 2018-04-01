@@ -19,12 +19,10 @@ import java.util.LinkedHashMap;
 
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
-public class BencodeInteger implements IBencode{
+public class BencodeInteger extends AbstractBencode{
 
 	@Override
 	public ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap){
-		
-		
 		
 		return null;
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.bencode.Bencode;
+import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTPacket {
 
@@ -24,7 +24,7 @@ public class DHTPacket {
 			list.add("error");
 			map.put("e",list);
 		}
-		return Bencode.encode(map);
+		return AbstractBencode.encodeRouter(map);
 	}
 	
 	public static String getFindNodeBecode(String target){
@@ -36,7 +36,7 @@ public class DHTPacket {
 		a.put("id", DHTServer.NODE_ID);
 		a.put("target",target);
 		map.put("a", a);
-		return Bencode.encode(map);
+		return AbstractBencode.encodeRouter(map);
 	}
 	
 	public static String getPeersBecode(String target){
@@ -48,18 +48,17 @@ public class DHTPacket {
 		a.put("id", DHTServer.NODE_ID);
 		a.put("info_hash",target);
 		map.put("a", a);
-		return Bencode.encode(map);
+		return AbstractBencode.encodeRouter(map);
 	}
 	
 	public static String getReponseBecode(String receiveMsg){
-//		LinkedHashMap<String, Object> receiveMsgMap = (LinkedHashMap<String, Object>) Bencode.decode(receiveMsg);
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "r");
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
 		a.put("id", DHTServer.NODE_ID);
 		map.put("r", a);
-		return Bencode.encode(map);
+		return AbstractBencode.encodeRouter(map);
 	}
 	
 }

@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
-public class BencodeString implements IBencode {
+public class BencodeString extends AbstractBencode {
 
 	int read = -1;
 	public BencodeString(int head) {

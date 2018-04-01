@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
-public class BencodeList implements IBencode {
+public class BencodeList extends AbstractBencode {
 
 	public ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap) {
 		
@@ -19,7 +19,7 @@ public class BencodeList implements IBencode {
 		ArrayList<Object> list = (ArrayList<Object>) value;
 		String str = "l";
 		for(Object object:list) {
-			str+= Bencode.encode(object);
+			str+= AbstractBencode.encodeRouter(object);
 		}
 		return str + "e";
 	}

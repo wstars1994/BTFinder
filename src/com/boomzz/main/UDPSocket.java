@@ -1,0 +1,35 @@
+package com.boomzz.main;
+
+import java.io.ByteArrayInputStream;
+import java.io.PushbackInputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.Arrays;
+
+public class UDPSocket {
+
+	public static PushbackInputStream request(String host,int port,String requestStr) {
+		DatagramSocket socket = null;
+		try {
+			socket = new DatagramSocket();
+			socket.setSoTimeout(5000);
+			DatagramPacket request = new DatagramPacket(requestStr.getBytes(),requestStr.getBytes().length,InetAddress.getByName(host),port);
+			socket.send(request);
+            DatagramPacket response = new DatagramPacket(new byte[1024], 1024);
+            socket.receive(response);
+            byte[] data = response.getData();
+            int i=data.length-1;
+            for(;i>0;i--) if(data[i]!=0) break;
+            byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
+            ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
+            return new PushbackInputStream(byteArry);
+		} catch (Exception e) {
+			return null;
+		} finally {
+			if(socket!=null) {
+				socket.close();
+			}
+		}
+	}
+}
