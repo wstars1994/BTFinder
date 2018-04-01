@@ -122,19 +122,15 @@ public class StreamUtil {
 	 *            the hex string
 	 * @return byte[]
 	 */
-	public static byte[] hexStringToBytes(String hexString) {
-		if (hexString == null || hexString.equals("")) {
-			return null;
-		}
-		hexString = hexString.toUpperCase();
-		int length = hexString.length() / 2;
-		char[] hexChars = hexString.toCharArray();
-		byte[] d = new byte[length];
-		for (int i = 0; i < length; i++) {
-			int pos = i * 2;
-			d[i] = (byte) (charToByte(hexChars[pos]) << 4 | charToByte(hexChars[pos + 1]));
-		}
-		return d;
+	public static byte[] hexStringToBytes(String s) {
+	    int len = s.length();
+	    byte[] b = new byte[len / 2];
+	    for (int i = 0; i < len; i += 2) {
+	        // 两位一组，表示一个字节,把这样表示的16进制字符串，还原成一个字节
+	        b[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character
+	                .digit(s.charAt(i + 1), 16));
+	    }
+	    return b;
 	}
 
 	/**

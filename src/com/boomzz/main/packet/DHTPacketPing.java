@@ -24,7 +24,7 @@ import com.boomzz.main.bencode.AbstractBencode;
 public class DHTPacketPing extends AbstractDHTPacket{
 
 	@Override
-	public String packet(String param) {
+	public byte[] packet(String param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		if("1".equals(param)) {

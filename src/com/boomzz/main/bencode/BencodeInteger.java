@@ -20,16 +20,19 @@ import java.util.LinkedHashMap;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
 public class BencodeInteger extends AbstractBencode{
-
 	@Override
-	public ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap){
-		
-		return null;
+	public ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap) throws Exception{
+		int num = 58;
+		String numStr = "";
+		while ((num=stream.read())!=101) {
+			numStr+=(char)num+"";
+		}
+		return new ObjectBytesModel(Integer.parseInt(numStr),null);
 	}
 
 	@Override
-	public String encode(Object object) {
-		return "i"+object+"e";
+	public byte[] encode(Object object) {
+		return ("i"+object+"e").getBytes();
 	}
 	
 }

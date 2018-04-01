@@ -13,9 +13,10 @@ public abstract class AbstractBencode {
 
 	public abstract ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap) throws Exception;
 	
-	public abstract String encode(Object object);
+	public abstract byte[] encode(Object object);
 	
 	public void specialValueDecode(String key,ObjectBytesModel values) {
+		if(values==null) return;
 		byte value[] = values.getBytes();
 		switch (key) {
 			case "ip":
@@ -67,7 +68,7 @@ public abstract class AbstractBencode {
 				bencode = new BencodeInteger();
 				break;
 			case 108://l  list
-				bencode = new BencodeList();
+				bencode = new BencodeList(head);
 				break;
 			default://[0-9]+       String
 				bencode = new BencodeString(head);
@@ -79,7 +80,7 @@ public abstract class AbstractBencode {
 		return null;
 	}
 	
-	public static String encodeRouter(Object object) {
+	public static byte[] encodeRouter(Object object) {
 		if(object instanceof String) {
 			return new BencodeString().encode(object);
 		}

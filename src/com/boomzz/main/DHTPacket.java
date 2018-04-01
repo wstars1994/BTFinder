@@ -8,7 +8,7 @@ import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTPacket {
 
-	public static String getPingBecode(int type){
+	public static byte[] getPingBecode(int type){
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		if(type==1) {
@@ -27,7 +27,7 @@ public class DHTPacket {
 		return AbstractBencode.encodeRouter(map);
 	}
 	
-	public static String getFindNodeBecode(String target){
+	public static byte[] getFindNodeBecode(String target){
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
@@ -39,7 +39,7 @@ public class DHTPacket {
 		return AbstractBencode.encodeRouter(map);
 	}
 	
-	public static String getPeersBecode(String target){
+	public static byte[] getPeersBecode(String target){
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
@@ -51,7 +51,7 @@ public class DHTPacket {
 		return AbstractBencode.encodeRouter(map);
 	}
 	
-	public static String getReponseBecode(String receiveMsg){
+	public static byte[] getReponseBecode(String receiveMsg){
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "r");

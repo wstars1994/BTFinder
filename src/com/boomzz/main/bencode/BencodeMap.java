@@ -20,19 +20,22 @@ public class BencodeMap extends AbstractBencode {
 			if(read==101) return new ObjectBytesModel(newMap, null);
 			ObjectBytesModel key = new BencodeString(read).decode(stream, newMap);
 			ObjectBytesModel value = AbstractBencode.process(stream, newMap);
-			super.specialValueDecode(key.getObject().toString(),value);
+			if(value!=null) {
+				super.specialValueDecode(key.getObject().toString(),value);
+			}
 			newMap.put(key.getObject().toString(), value.getObject());
 		}
 		return null;
 	}
 
 	@Override
-	public String encode(Object object) {
+	public byte[] encode(Object object) {
 		LinkedHashMap<String, Object> hashMap = (LinkedHashMap<String, Object>) object;
 		String str = "d";
 		for(Map.Entry<String, Object> m:hashMap.entrySet()) {
-			str+= AbstractBencode.encodeRouter(m.getKey())+ AbstractBencode.encodeRouter(m.getValue());
+			 byte[] key = AbstractBencode.encodeRouter(m.getKey());
+			 byte[] value = AbstractBencode.encodeRouter(m.getValue());
 		}
-		return str+"e";
+		return (str+"e");
 	}
 }
