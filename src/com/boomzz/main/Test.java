@@ -17,7 +17,7 @@ public class Test {
         	AbstractDHTPacket abstractDHTPacket = new DHTPacketPeers();
         	String upperCase = "9C03E2FA8AC2F13BE279260A302DD49A63E031D9";
         	byte[] hexStringToBytes = StreamUtil.hexStringToBytes(upperCase);
-        	String pac = abstractDHTPacket.packet(new String(hexStringToBytes));
+        	byte pac[] = abstractDHTPacket.packet(new String(hexStringToBytes));
         	PushbackInputStream stream = UDPSocket.request("router.bittorrent.com", 6881, pac);
         	if(stream!=null) {
         		LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();

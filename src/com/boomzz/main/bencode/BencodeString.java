@@ -27,6 +27,6 @@ public class BencodeString extends AbstractBencode {
 	
 	@Override
 	public byte[] encode(Object value) {
-		return value.toString().length()+":"+value.toString();
+		return (value.toString().length()+":"+value.toString()).getBytes();
 	}
 }

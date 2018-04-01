@@ -40,7 +40,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			AbstractDHTPacket abstractDHTPacket = new DHTPacketPeers();
 			String upperCase = "9C03E2FA8AC2F13BE279260A302DD49A63E031D9";
         	byte[] hexStringToBytes = StreamUtil.hexStringToBytes(upperCase);
-        	String pac = abstractDHTPacket.packet(new String(hexStringToBytes));
+        	byte[] pac = abstractDHTPacket.packet(new String(hexStringToBytes));
 			PushbackInputStream stream = UDPSocket.request(str.split("/")[1].split(":")[0], Integer.parseInt(str.split("/")[1].split(":")[1]), pac);
 			if(stream!=null) {
 				LinkedHashMap<String, Object> resmap =new LinkedHashMap<String, Object>();
