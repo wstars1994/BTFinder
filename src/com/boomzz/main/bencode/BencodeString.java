@@ -3,6 +3,9 @@ package com.boomzz.main.bencode;
 import java.io.PushbackInputStream;
 import java.util.LinkedHashMap;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.boomzz.main.StreamUtil;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
 public class BencodeString extends AbstractBencode {
@@ -27,6 +30,12 @@ public class BencodeString extends AbstractBencode {
 	
 	@Override
 	public byte[] encode(Object value) {
+		String str = value.toString();
+		if(str.length()==40) {
+			byte[] hexBytes = StreamUtil.hexStringToBytes(str);
+			byte[] addAll = ArrayUtils.addAll((hexBytes.length+":").getBytes(), hexBytes);
+			return addAll;
+		}
 		return (value.toString().length()+":"+value.toString()).getBytes();
 	}
 }

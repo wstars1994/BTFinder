@@ -17,17 +17,21 @@ package com.boomzz.main.bencode;
 import java.io.PushbackInputStream;
 import java.util.LinkedHashMap;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
 public class BencodeInteger extends AbstractBencode{
 	@Override
 	public ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap) throws Exception{
-		int num = 58;
+		int num = 101;
 		String numStr = "";
+		byte res[] = {};
 		while ((num=stream.read())!=101) {
+			res = ArrayUtils.add(res, (byte)num);
 			numStr+=(char)num+"";
 		}
-		return new ObjectBytesModel(Integer.parseInt(numStr),null);
+		return new ObjectBytesModel(Integer.parseInt(numStr),res);
 	}
 
 	@Override
