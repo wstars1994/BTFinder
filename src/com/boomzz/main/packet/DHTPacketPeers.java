@@ -1,10 +1,8 @@
 package com.boomzz.main.packet;
 
-import java.io.PushbackInputStream;
 import java.util.LinkedHashMap;
 
 import com.boomzz.main.DHTServer;
-import com.boomzz.main.UDPSocket;
 import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTPacketPeers extends AbstractDHTPacket{
