@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.packet.AbstractDHTPacket;
-import com.boomzz.main.packet.DHTPacketFindNode;
 import com.boomzz.main.packet.DHTPacketPeers;
 
 public class Test {
@@ -16,12 +15,12 @@ public class Test {
         try {
         	AbstractDHTPacket abstractDHTPacket = new DHTPacketPeers();
         	String upperCase = "9C03E2FA8AC2F13BE279260A302DD49A63E031D9";
-        	byte[] hexStringToBytes = StreamUtil.hexStringToBytes(upperCase);
-        	byte pac[] = abstractDHTPacket.packet(new String(hexStringToBytes));
-        	PushbackInputStream stream = UDPSocket.request("router.bittorrent.com", 6881, pac);
+        	byte pac[] = abstractDHTPacket.packet(upperCase);
+//        	PushbackInputStream stream = UDPSocket.request("router.bittorrent.com", 6881, pac);
+        	PushbackInputStream stream = UDPSocket.request("137.74.170.30", 51413, pac);
         	if(stream!=null) {
         		LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();
-        		AbstractBencode.process(stream,map);
+        		AbstractBencode.decodeRouter(stream,map);
         		abstractDHTPacket.unpacket(map);
         	}else {
         		System.out.println("E-------request error");

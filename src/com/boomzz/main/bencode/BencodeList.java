@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
 public class BencodeList extends AbstractBencode {
@@ -19,10 +21,10 @@ public class BencodeList extends AbstractBencode {
 	
 	public ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap) throws Exception {
 		int num = 58;
-		List<Object> list = new ArrayList<>();
+		List<ObjectBytesModel> list = new ArrayList<>();
 		while ((num=stream.read())!=101) {
 			stream.unread(num);
-			list.add(AbstractBencode.process(stream, hashMap).getObject());
+			list.add(AbstractBencode.decodeRouter(stream, hashMap));
 		}
 		return new ObjectBytesModel(list,null);
 	}
@@ -30,11 +32,14 @@ public class BencodeList extends AbstractBencode {
 	@Override
 	public byte[] encode(Object value) {
 		ArrayList<Object> list = (ArrayList<Object>) value;
-		String str = "l";
+		byte bytes[] = {};
 		for(Object object:list) {
-			str+= AbstractBencode.encodeRouter(object);
+			byte[] encodeRouter = AbstractBencode.encodeRouter(object);
+			bytes = ArrayUtils.addAll(bytes, encodeRouter);
 		}
-		return (str + "e").getBytes();
+		ArrayUtils.addAll("l".getBytes(),bytes);
+		ArrayUtils.addAll(bytes,"e".getBytes());
+		return bytes;
 	}
 
 }

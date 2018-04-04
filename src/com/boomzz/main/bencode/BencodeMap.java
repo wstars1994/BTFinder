@@ -1,9 +1,10 @@
 package com.boomzz.main.bencode;
 
 import java.io.PushbackInputStream;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
@@ -21,7 +22,7 @@ public class BencodeMap extends AbstractBencode {
 			if (read == 101)
 				return new ObjectBytesModel(newMap, null);
 			ObjectBytesModel key = new BencodeString(read).decode(stream, newMap);
-			ObjectBytesModel value = AbstractBencode.process(stream, newMap);
+			ObjectBytesModel value = AbstractBencode.decodeRouter(stream, newMap);
 			if (value != null) {
 				super.specialValueDecode(key.getObject().toString(), value);
 			}
@@ -38,11 +39,11 @@ public class BencodeMap extends AbstractBencode {
 		for(Map.Entry<String, Object> m:hashMap.entrySet()) {
 			 byte[] key = AbstractBencode.encodeRouter(m.getKey());
 			 byte[] value = AbstractBencode.encodeRouter(m.getValue());
-			 byte newByte[] = new byte[key.length+value.length];
-			 System.arraycopy(key, 0, newByte, 0, key.length);
-			 
-			 bytes = Arrays.copyOf(value, bytes.length+value.length);
+			 bytes = ArrayUtils.addAll(bytes,key);
+			 bytes = ArrayUtils.addAll(bytes,value);
 		}
+		bytes = ArrayUtils.addAll(str.getBytes(),bytes);
+		bytes = ArrayUtils.addAll(bytes,"e".getBytes());
 		return bytes;
 	}
 }

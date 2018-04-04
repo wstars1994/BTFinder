@@ -1,6 +1,7 @@
 package com.boomzz.main.bencode;
 
 import java.io.PushbackInputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -52,12 +53,20 @@ public abstract class AbstractBencode {
 					values.setObject(values.getObject()+StreamUtil.bytesToHexString(nodeIdBytes).toString()+"/"+model.getObject()+"#");
 				}
 				break;
+			case "values":
+				ArrayList<ObjectBytesModel> list = (ArrayList<ObjectBytesModel>) values.getObject();
+				for(ObjectBytesModel model:list) {
+					ObjectBytesModel objectBytesModel = new ObjectBytesModel(null,model.getBytes());
+					specialValueDecode("ip",objectBytesModel);
+					model.setObject(objectBytesModel.getObject());
+				}
+				break;
 			default:
 				break;
 		}
 	}
 	
-	public static ObjectBytesModel process(PushbackInputStream stream,LinkedHashMap<String,Object> hashMap) throws Exception {
+	public static ObjectBytesModel decodeRouter(PushbackInputStream stream,LinkedHashMap<String,Object> hashMap) throws Exception {
 		int head = stream.read();
 		AbstractBencode bencode = null;
 		switch (head) {
