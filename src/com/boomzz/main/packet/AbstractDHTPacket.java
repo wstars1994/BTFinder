@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 
 public abstract class AbstractDHTPacket {
 
-	public abstract byte[] packet(String param);
+	public abstract byte[] packet(String... param);
 	
 	public abstract Object unpacket(LinkedHashMap<String, Object> map);
 	
