@@ -10,12 +10,20 @@ import java.util.List;
 import com.boomzz.main.StreamUtil;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
+/**
+ * 将二进制解码
+ * @author Duo Nuo
+ *上午8:56:44
+ */
 public abstract class AbstractBencode {
 
 	public abstract ObjectBytesModel decode(PushbackInputStream stream, LinkedHashMap<String, Object> hashMap) throws Exception;
 	
 	public abstract byte[] encode(Object object);
 	
+	/**
+	 * 回应解码
+	 */
 	public void specialValueDecode(String key,ObjectBytesModel values) {
 		if(values==null) return;
 		byte value[] = values.getBytes();

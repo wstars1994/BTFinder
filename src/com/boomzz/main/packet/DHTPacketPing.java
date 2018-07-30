@@ -18,20 +18,20 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.DHTServer;
+import com.boomzz.main.DHT;
 import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTPacketPing extends AbstractDHTPacket{
 
 	@Override
-	public byte[] packet(String param) {
+	public byte[] packet(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		if("1".equals(param)) {
 			map.put("y", "q");
 			map.put("q", "ping");
 			LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
-			a.put("id", DHTServer.NODE_ID);
+			a.put("id",DHT.NODE_ID);
 			map.put("a",a);
 		}else {
 			map.put("y", "e");
