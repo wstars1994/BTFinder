@@ -27,7 +27,7 @@ public class DHTPacketPing extends AbstractDHTPacket{
 	public byte[] packet(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
-		if("1".equals(param)) {
+		if("1".equals(param[0])) {
 			map.put("y", "q");
 			map.put("q", "ping");
 			LinkedHashMap<String, Object> a  = new LinkedHashMap<>();

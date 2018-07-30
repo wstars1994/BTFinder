@@ -7,6 +7,11 @@ import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTAnnouncePeer extends AbstractDHTPacket {
 
+	private Object token = null;
+	public DHTAnnouncePeer(Object token) {
+		this.token = token;
+	}
+
 	@Override
 	public byte[] packet(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
@@ -16,7 +21,7 @@ public class DHTAnnouncePeer extends AbstractDHTPacket {
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
 		a.put("id", DHT.NODE_ID);
 		a.put("info_hash",param[0]);
-		a.put("token",param[1]);
+		a.put("token",token);
 		a.put("port",10756);
 		map.put("a", a);
 		return AbstractBencode.encodeRouter(map);
