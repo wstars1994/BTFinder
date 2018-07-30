@@ -9,7 +9,7 @@ import com.boomzz.main.packet.DHTPacketPeers;
 
 public class Test {
 
-	public static String NODE_ID = "2aa9df91320ea0260502";
+	public static String NODE_ID = "112aa9df91320ea0260502";
 
 	public static void main(String[] args) {
         try {
