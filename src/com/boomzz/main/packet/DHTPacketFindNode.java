@@ -15,7 +15,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 		map.put("q", "find_node");
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
 		a.put("id", DHT.NODE_ID);
-		a.put("target",param);
+		a.put("target",param[0]);
 		map.put("a", a);
 		return AbstractBencode.encodeRouter(map);
 	}

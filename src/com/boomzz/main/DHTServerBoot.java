@@ -6,6 +6,9 @@ package com.boomzz.main;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketTimeoutException;
+
+import com.boomzz.main.packet.DHTPacketFindNode;
 
 public class DHTServerBoot {
 
@@ -20,17 +23,34 @@ public class DHTServerBoot {
     private static DatagramPacket datagramPacket;
 	
 	public static void main(String[] args) {
+		//join dht
 		try {
-			datagramSocket = new DatagramSocket(PORT_NUM);
-			datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
-			datagramSocket.receive(datagramPacket);
-			System.out.println(new String(receMsgs));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			if (datagramSocket != null) {
-                datagramSocket.close();
-            }
+			//target
+			System.out.println("准备加入 : "+"router.bittorrent.com");
+			DHT.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.bittorrent.com", 6881);
+			System.out.println("准备加入 : "+"dht.transmissionbt.com");
+			DHT.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "dht.transmissionbt.com", 6881);
+			System.out.println("准备加入 : "+"router.utorrent.com");
+			DHT.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.utorrent.com", 6881);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		System.out.println("DHT服务开启");
+		while (true) {
+			try {
+				datagramSocket = new DatagramSocket(PORT_NUM);
+				datagramSocket.setSoTimeout(30000);
+				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
+				datagramSocket.receive(datagramPacket);
+				System.out.println(new String(receMsgs));
+			}catch (SocketTimeoutException e) {
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				if (datagramSocket != null) {
+					datagramSocket.close();
+				}
+			}
 		}
 	}
 }
