@@ -20,7 +20,7 @@ public class DHTConfig {
     		abstractDHTPacket.unpacket(map);
     		return map;
     	}else {
-    		System.out.println("ERROR 请求无回应");
+    		BTLogger.log(DHTServerBoot.class,abstractDHTPacket.getClass().getSimpleName()+" - ERROR 请求无回应");
     	}
 		return null;
 	}
