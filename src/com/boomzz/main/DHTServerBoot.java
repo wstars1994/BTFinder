@@ -42,7 +42,7 @@ public class DHTServerBoot {
 		while (true) {
 			try {
 				datagramSocket = new DatagramSocket(PORT_NUM);
-				datagramSocket.setSoTimeout(30000);
+				datagramSocket.setSoTimeout(30*60*1000);
 				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
 				datagramSocket.receive(datagramPacket);
 				BTLogger.log(DHTServerBoot.class,"DHT服务收到消息 : "+ new String(receMsgs));
