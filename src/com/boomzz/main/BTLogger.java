@@ -10,9 +10,13 @@ public class BTLogger {
 	
 	private static FileHandler fileHandler = null;
 	
-	public static void log(Class clazz,String text) throws Exception {
-		LogRecord lr = new LogRecord(Level.INFO,text);
-		getLogger(clazz).log(lr);
+	public static void log(Class clazz,String text){
+		try {
+			LogRecord lr = new LogRecord(Level.INFO,text);
+			getLogger(clazz).log(lr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static Logger getLogger(Class clazz) throws Exception {

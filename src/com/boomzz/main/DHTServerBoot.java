@@ -33,11 +33,12 @@ public class DHTServerBoot {
 			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "dht.transmissionbt.com", 6881);
 			BTLogger.log(DHTServerBoot.class,"准备加入 : router.utorrent.com");
 			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.utorrent.com", 6881);
-			
-			BTLogger.log(DHTServerBoot.class,"DHT服务开起,端口 : "+PORT_NUM);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		
+		BTLogger.log(DHTServerBoot.class,"DHT服务开起,端口 : "+PORT_NUM);
+
 		while (true) {
 			try {
 				datagramSocket = new DatagramSocket(PORT_NUM);
@@ -46,6 +47,7 @@ public class DHTServerBoot {
 				datagramSocket.receive(datagramPacket);
 				BTLogger.log(DHTServerBoot.class,"DHT服务收到消息 : "+ new String(receMsgs));
 			}catch (SocketTimeoutException e) {
+				BTLogger.log(DHTServerBoot.class,"超时重新启动");
 			}catch (Exception e) {
 				e.printStackTrace();
 			}finally {
