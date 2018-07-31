@@ -6,9 +6,7 @@ package com.boomzz.main;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketTimeoutException;
-
-import com.boomzz.main.packet.DHTPacketFindNode;
+import java.util.logging.Logger;
 
 public class DHTServerBoot {
 
@@ -24,33 +22,37 @@ public class DHTServerBoot {
 	
 	public static void main(String[] args) {
 		//join dht
-		try {
-			//target
-			System.out.println("准备加入 : "+"router.bittorrent.com");
-			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.bittorrent.com", 6881);
-			System.out.println("准备加入 : "+"dht.transmissionbt.com");
-			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "dht.transmissionbt.com", 6881);
-			System.out.println("准备加入 : "+"router.utorrent.com");
-			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.utorrent.com", 6881);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		System.out.println("DHT服务开启");
-		while (true) {
-			try {
-				datagramSocket = new DatagramSocket(PORT_NUM);
-				datagramSocket.setSoTimeout(30000);
-				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
-				datagramSocket.receive(datagramPacket);
-				System.out.println(new String(receMsgs));
-			}catch (SocketTimeoutException e) {
-			}catch (Exception e) {
-				e.printStackTrace();
-			}finally {
-				if (datagramSocket != null) {
-					datagramSocket.close();
-				}
-			}
-		}
+//		try {
+//			//target
+//			System.out.println("准备加入 : "+"router.bittorrent.com");
+//			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.bittorrent.com", 6881);
+//			System.out.println("准备加入 : "+"dht.transmissionbt.com");
+//			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "dht.transmissionbt.com", 6881);
+//			System.out.println("准备加入 : "+"router.utorrent.com");
+//			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.utorrent.com", 6881);
+//		} catch (Exception e1) {
+//			e1.printStackTrace();
+//		}
+//		System.out.println("DHT服务开启");
+//		
+		Logger.getLogger(DHTServerBoot.class.getName()).info("asdasd");
+		
+		
+//		while (true) {
+//			try {
+//				datagramSocket = new DatagramSocket(PORT_NUM);
+//				datagramSocket.setSoTimeout(30000);
+//				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
+//				datagramSocket.receive(datagramPacket);
+//				System.out.println(new String(receMsgs));
+//			}catch (SocketTimeoutException e) {
+//			}catch (Exception e) {
+//				e.printStackTrace();
+//			}finally {
+//				if (datagramSocket != null) {
+//					datagramSocket.close();
+//				}
+//			}
+//		}
 	}
 }
