@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.packet.AbstractDHTPacket;
 
-public class DHT {
+public class DHTConfig {
 	
 	public static String NODE_ID = "abcdefghij0123456789";
 	public static String TEST_INFO_HASH = "9C03E2FA8AC2F13BE279260A302DD49A63E031D9";

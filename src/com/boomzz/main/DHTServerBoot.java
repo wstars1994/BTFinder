@@ -27,11 +27,11 @@ public class DHTServerBoot {
 		try {
 			//target
 			System.out.println("准备加入 : "+"router.bittorrent.com");
-			DHT.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.bittorrent.com", 6881);
+			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.bittorrent.com", 6881);
 			System.out.println("准备加入 : "+"dht.transmissionbt.com");
-			DHT.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "dht.transmissionbt.com", 6881);
+			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "dht.transmissionbt.com", 6881);
 			System.out.println("准备加入 : "+"router.utorrent.com");
-			DHT.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.utorrent.com", 6881);
+			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.utorrent.com", 6881);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

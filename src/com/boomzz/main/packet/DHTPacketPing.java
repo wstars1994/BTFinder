@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.DHT;
+import com.boomzz.main.DHTConfig;
 import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTPacketPing extends AbstractDHTPacket{
@@ -31,7 +31,7 @@ public class DHTPacketPing extends AbstractDHTPacket{
 			map.put("y", "q");
 			map.put("q", "ping");
 			LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
-			a.put("id",DHT.NODE_ID);
+			a.put("id",DHTConfig.NODE_ID);
 			map.put("a",a);
 		}else {
 			map.put("y", "e");
