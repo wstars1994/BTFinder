@@ -1,8 +1,6 @@
 package com.boomzz.main;
 
-import java.util.LinkedHashMap;
-
-import com.boomzz.main.packet.DHTPacketPeers;
+import java.security.SecureRandom;
 
 public class Test {
 
@@ -16,7 +14,11 @@ public class Test {
 		String infoHash = "9C03E2FA8AC2F13BE279260A302DD49A63E031D9";
 		
 		try {
-        	LinkedHashMap<String, Object> requestData = DHT.requestData(new DHTPacketPeers(),infoHash, "router.utorrent.com", 6881);
+//        	LinkedHashMap<String, Object> requestData = DHT.requestData(new DHTPacketFindNode(),infoHash, "router.utorrent.com", 6881);
+//        	LinkedHashMap<String, Object> requestData = DHT.requestData(new DHTPacketFindNode(),infoHash, "127.0.0.1", 8091);
+			SecureRandom csprng = new SecureRandom();
+			byte[] randomBytes = new byte[20];
+			csprng.nextBytes(randomBytes);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
