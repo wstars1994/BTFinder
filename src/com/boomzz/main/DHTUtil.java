@@ -13,7 +13,7 @@ public class DHTUtil {
 	public static String TEST_INFO_HASH = "9C03E2FA8AC2F13BE279260A302DD49A63E031D9";
 	
 	public static LinkedHashMap<String, Object> requestData(AbstractDHTPacket abstractDHTPacket, String param,String url,int port) throws Exception{
-    	byte pac[] = abstractDHTPacket.packet(param);
+    	byte pac[] = abstractDHTPacket.reqPacket(param);
     	PushbackInputStream stream = UDPSocket.request(url, port, pac);
     	if(stream!=null) {
     		LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();

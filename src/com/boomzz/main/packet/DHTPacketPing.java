@@ -24,7 +24,7 @@ import com.boomzz.main.bencode.AbstractBencode;
 public class DHTPacketPing extends AbstractDHTPacket{
 
 	@Override
-	public byte[] packet(String... param) {
+	public byte[] reqPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		if("1".equals(param[0])) {
@@ -47,6 +47,15 @@ public class DHTPacketPing extends AbstractDHTPacket{
 	public Object unpacket(LinkedHashMap<String, Object> map) {
 		System.out.println("the node is good");
 		
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.boomzz.main.packet.AbstractDHTPacket#repPacket(java.lang.String[])
+	 */
+	@Override
+	public byte[] repPacket(String... param) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

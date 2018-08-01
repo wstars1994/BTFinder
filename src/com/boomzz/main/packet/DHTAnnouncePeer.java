@@ -13,7 +13,7 @@ public class DHTAnnouncePeer extends AbstractDHTPacket {
 	}
 
 	@Override
-	public byte[] packet(String... param) {
+	public byte[] reqPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
@@ -34,6 +34,11 @@ public class DHTAnnouncePeer extends AbstractDHTPacket {
 		
 		
 		
+		return null;
+	}
+
+	@Override
+	public byte[] repPacket(String... param) {
 		return null;
 	}
 

@@ -10,7 +10,7 @@ import com.boomzz.main.bencode.model.ObjectBytesModel;
 public class DHTPacketPeers extends AbstractDHTPacket{
 
 	@Override
-	public byte[] packet(String... param) {
+	public byte[] reqPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
@@ -62,6 +62,15 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 				e.printStackTrace();
 			}
 		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.boomzz.main.packet.AbstractDHTPacket#repPacket(java.lang.String[])
+	 */
+	@Override
+	public byte[] repPacket(String... param) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

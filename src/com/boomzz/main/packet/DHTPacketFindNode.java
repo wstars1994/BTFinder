@@ -10,7 +10,7 @@ import com.boomzz.main.db.DBUtil;
 public class DHTPacketFindNode extends AbstractDHTPacket {
 
 	@Override
-	public byte[] packet(String... param) {
+	public byte[] reqPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
@@ -43,6 +43,15 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 			}
 		}
 		
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.boomzz.main.packet.AbstractDHTPacket#repPacket(java.lang.String[])
+	 */
+	@Override
+	public byte[] repPacket(String... param) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
