@@ -4,9 +4,14 @@
  */
 package com.boomzz.main;
 
+import java.io.ByteArrayInputStream;
+import java.io.PushbackInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 
+import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.db.DBUtil;
 import com.boomzz.main.packet.DHTPacketFindNode;
 
@@ -45,6 +50,12 @@ public class DHTServerBoot {
 //				datagramSocket.setSoTimeout(30*60*1000);
 //				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
 //				datagramSocket.receive(datagramPacket);
+//				int i=data.length-1;
+//		        for(;i>0;i--) if(data[i]!=0) break;
+//		        byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
+//		        ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
+//		        LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();
+//				AbstractBencode.decodeRouter(PushbackInputStream(byteArry),map);
 //				BTLogger.log(DHTServerBoot.class,"DHT服务收到消息 : "+ new String(receMsgs));
 //			}catch (SocketTimeoutException e) {
 //				BTLogger.log(DHTServerBoot.class,"超时重新启动");
