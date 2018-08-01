@@ -3,7 +3,7 @@ package com.boomzz.main.packet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.boomzz.main.DHT;
+import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTPacketFindNode extends AbstractDHTPacket {
@@ -15,7 +15,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 		map.put("y", "q");
 		map.put("q", "find_node");
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
-		a.put("id", DHT.NODE_ID);
+		a.put("id", DHTUtil.NODE_ID);
 		a.put("target",param[0]);
 		map.put("a", a);
 		return AbstractBencode.encodeRouter(map);
@@ -35,7 +35,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 					System.out.print("nodeId : " + nodeId);
 					System.out.print(" ip : " + ip);
 					System.out.println(" port : " + port);
-					LinkedHashMap<String, Object> requestData = DHT.requestData(new DHTPacketPing(),"1",ip, port);
+					LinkedHashMap<String, Object> requestData = DHTUtil.requestData(new DHTPacketPing(),"1",ip, port);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

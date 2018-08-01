@@ -3,7 +3,7 @@ package com.boomzz.main.packet;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.DHT;
+import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
@@ -16,7 +16,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 		map.put("y", "q");
 		map.put("q", "get_peers");
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
-		a.put("id", DHT.NODE_ID);
+		a.put("id", DHTUtil.NODE_ID);
 		a.put("info_hash",param[0]);
 		map.put("a", a);
 		return AbstractBencode.encodeRouter(map);
@@ -40,7 +40,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			for(ObjectBytesModel obm : values) {
 				try {
 					String arr[] = obm.getObject().toString().split(":");
-					LinkedHashMap<String, Object> requestData = DHT.requestData(new DHTAnnouncePeer(token), DHT.TEST_INFO_HASH,arr[0],Integer.parseInt(arr[1]));
+					LinkedHashMap<String, Object> requestData = DHTUtil.requestData(new DHTAnnouncePeer(token), DHTUtil.TEST_INFO_HASH,arr[0],Integer.parseInt(arr[1]));
 					System.out.println(requestData);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,7 +54,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			
 			System.out.println(str.split("/")[1]);
 			try {
-				LinkedHashMap<String, Object> requestData = DHT.requestData(new DHTPacketPeers(),DHT.TEST_INFO_HASH,addr[0], Integer.parseInt(addr[1]));
+				LinkedHashMap<String, Object> requestData = DHTUtil.requestData(new DHTPacketPeers(),DHTUtil.TEST_INFO_HASH,addr[0], Integer.parseInt(addr[1]));
 				if(requestData!=null)
 					System.out.println("request again : " + requestData);
 			} catch (Exception e) {

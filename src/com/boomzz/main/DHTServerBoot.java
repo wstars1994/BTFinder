@@ -6,9 +6,10 @@ package com.boomzz.main;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketTimeoutException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
-import com.boomzz.main.packet.DHTPacketFindNode;
+import com.boomzz.main.db.DBUtil;
 
 public class DHTServerBoot {
 
@@ -23,20 +24,25 @@ public class DHTServerBoot {
     private static DatagramPacket datagramPacket;
 	
 	public static void main(String[] args) {
-		//join dht
+//		//join dht
+//		try {
+//			MyLogger.log(DHTServerBoot.class,"------------------------------------------------");
+////			//target
+//			MyLogger.log(DHTServerBoot.class,"准备加入 : router.bittorrent.com");
+//			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "router.bittorrent.com", 6881);
+//			MyLogger.log(DHTServerBoot.class,"准备加入 : dht.transmissionbt.com");
+//			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "dht.transmissionbt.com", 6881);
+//			MyLogger.log(DHTServerBoot.class,"准备加入 : router.utorrent.com");
+//			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "router.utorrent.com", 6881);
+//		} catch (Exception e1) {
+//			e1.printStackTrace();
+//		}
 		try {
-			MyLogger.log(DHTServerBoot.class,"------------------------------------------------");
-//			//target
-			MyLogger.log(DHTServerBoot.class,"准备加入 : router.bittorrent.com");
-			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "router.bittorrent.com", 6881);
-			MyLogger.log(DHTServerBoot.class,"准备加入 : dht.transmissionbt.com");
-			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "dht.transmissionbt.com", 6881);
-			MyLogger.log(DHTServerBoot.class,"准备加入 : router.utorrent.com");
-			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "router.utorrent.com", 6881);
-		} catch (Exception e1) {
-			e1.printStackTrace();
+			Connection connection = DBUtil.getConnection();
+			System.out.println(connection.isReadOnly());
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
 //		BTLogger.log(DHTServerBoot.class,"DHT服务开起,端口 : "+PORT_NUM);
 
 //		while (true) {
