@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
+import com.boomzz.main.db.DBUtil;
 
 public class DHTPacketFindNode extends AbstractDHTPacket {
 
@@ -32,10 +33,10 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 				String ip = node.split("/")[1].split(":")[0];
 				int port = Integer.parseInt(node.split("/")[1].split(":")[1]);
 				try {
-					System.out.print("nodeId : " + nodeId);
-					System.out.print(" ip : " + ip);
-					System.out.println(" port : " + port);
 					LinkedHashMap<String, Object> requestData = DHTUtil.requestData(new DHTPacketPing(),"1",ip, port);
+					if(requestData!=null) {
+						DBUtil.execute("INSERT INTO BT_DHT_NODE(NODE_ID,NODE_IP,NODE_PORT) VALUES('"+nodeId+"','"+ip+"','"+port+"')");
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

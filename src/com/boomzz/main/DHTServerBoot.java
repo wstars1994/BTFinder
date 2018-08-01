@@ -6,10 +6,9 @@ package com.boomzz.main;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import com.boomzz.main.db.DBUtil;
+import com.boomzz.main.packet.DHTPacketFindNode;
 
 public class DHTServerBoot {
 
@@ -25,23 +24,18 @@ public class DHTServerBoot {
 	
 	public static void main(String[] args) {
 //		//join dht
-//		try {
-//			MyLogger.log(DHTServerBoot.class,"------------------------------------------------");
-////			//target
-//			MyLogger.log(DHTServerBoot.class,"准备加入 : router.bittorrent.com");
-//			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "router.bittorrent.com", 6881);
-//			MyLogger.log(DHTServerBoot.class,"准备加入 : dht.transmissionbt.com");
-//			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "dht.transmissionbt.com", 6881);
-//			MyLogger.log(DHTServerBoot.class,"准备加入 : router.utorrent.com");
-//			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "router.utorrent.com", 6881);
-//		} catch (Exception e1) {
-//			e1.printStackTrace();
-//		}
 		try {
-			Connection connection = DBUtil.getConnection();
-			System.out.println(connection.isReadOnly());
-		} catch (SQLException e) {
-			e.printStackTrace();
+			DBUtil.init();
+			MyLogger.log(DHTServerBoot.class,"------------------------------------------------");
+//			//target
+			MyLogger.log(DHTServerBoot.class,"准备加入 : router.bittorrent.com");
+			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "router.bittorrent.com", 6881);
+			MyLogger.log(DHTServerBoot.class,"准备加入 : dht.transmissionbt.com");
+			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "dht.transmissionbt.com", 6881);
+			MyLogger.log(DHTServerBoot.class,"准备加入 : router.utorrent.com");
+			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "router.utorrent.com", 6881);
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 //		BTLogger.log(DHTServerBoot.class,"DHT服务开起,端口 : "+PORT_NUM);
 
