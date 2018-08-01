@@ -25,36 +25,36 @@ public class DHTServerBoot {
 	public static void main(String[] args) {
 		//join dht
 		try {
-			BTLogger.log(DHTServerBoot.class,"------------------------------------------------");
+			MyLogger.log(DHTServerBoot.class,"------------------------------------------------");
 //			//target
-			BTLogger.log(DHTServerBoot.class,"准备加入 : router.bittorrent.com");
-			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.bittorrent.com", 6881);
-			BTLogger.log(DHTServerBoot.class,"准备加入 : dht.transmissionbt.com");
-			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "dht.transmissionbt.com", 6881);
-			BTLogger.log(DHTServerBoot.class,"准备加入 : router.utorrent.com");
-			DHTConfig.requestData(new DHTPacketFindNode(),"mnopqrstuvwxyz123456", "router.utorrent.com", 6881);
+			MyLogger.log(DHTServerBoot.class,"准备加入 : router.bittorrent.com");
+			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "router.bittorrent.com", 6881);
+			MyLogger.log(DHTServerBoot.class,"准备加入 : dht.transmissionbt.com");
+			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "dht.transmissionbt.com", 6881);
+			MyLogger.log(DHTServerBoot.class,"准备加入 : router.utorrent.com");
+			DHT.requestData(new DHTPacketFindNode(),DHT.NODE_ID, "router.utorrent.com", 6881);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		
-		BTLogger.log(DHTServerBoot.class,"DHT服务开起,端口 : "+PORT_NUM);
+//		BTLogger.log(DHTServerBoot.class,"DHT服务开起,端口 : "+PORT_NUM);
 
-		while (true) {
-			try {
-				datagramSocket = new DatagramSocket(PORT_NUM);
-				datagramSocket.setSoTimeout(30*60*1000);
-				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
-				datagramSocket.receive(datagramPacket);
-				BTLogger.log(DHTServerBoot.class,"DHT服务收到消息 : "+ new String(receMsgs));
-			}catch (SocketTimeoutException e) {
-				BTLogger.log(DHTServerBoot.class,"超时重新启动");
-			}catch (Exception e) {
-				e.printStackTrace();
-			}finally {
-				if (datagramSocket != null) {
-					datagramSocket.close();
-				}
-			}
-		}
+//		while (true) {
+//			try {
+//				datagramSocket = new DatagramSocket(PORT_NUM);
+//				datagramSocket.setSoTimeout(30*60*1000);
+//				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
+//				datagramSocket.receive(datagramPacket);
+//				BTLogger.log(DHTServerBoot.class,"DHT服务收到消息 : "+ new String(receMsgs));
+//			}catch (SocketTimeoutException e) {
+//				BTLogger.log(DHTServerBoot.class,"超时重新启动");
+//			}catch (Exception e) {
+//				e.printStackTrace();
+//			}finally {
+//				if (datagramSocket != null) {
+//					datagramSocket.close();
+//				}
+//			}
+//		}
 	}
 }

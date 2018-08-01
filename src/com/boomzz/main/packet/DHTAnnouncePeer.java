@@ -2,7 +2,7 @@ package com.boomzz.main.packet;
 
 import java.util.LinkedHashMap;
 
-import com.boomzz.main.DHTConfig;
+import com.boomzz.main.DHT;
 import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTAnnouncePeer extends AbstractDHTPacket {
@@ -19,7 +19,7 @@ public class DHTAnnouncePeer extends AbstractDHTPacket {
 		map.put("y", "q");
 		map.put("q", "announce_peer");
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
-		a.put("id", DHTConfig.NODE_ID);
+		a.put("id", DHT.NODE_ID);
 		a.put("info_hash",param[0]);
 		a.put("token",token);
 		a.put("port",10756);

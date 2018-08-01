@@ -6,7 +6,7 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-public class BTLogger {
+public class MyLogger {
 	
 	private static FileHandler fileHandler = null;
 	
