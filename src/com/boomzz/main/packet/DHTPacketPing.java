@@ -52,8 +52,14 @@ public class DHTPacketPing extends AbstractDHTPacket{
 
 	@Override
 	public byte[] repPacket(String... param) {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
+		map.put("ip", param[0]);
+		map.put("t", param[1]);
+		map.put("y", "r");
+		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
+		a.put("id",DHTUtil.NODE_ID);
+		map.put("r",a);
+		return AbstractBencode.encodeRouter(map);
 	}
 
 
