@@ -23,7 +23,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 	}
 
 	@Override
-	public Object unpacket(LinkedHashMap<String, Object> map) {
+	public Object reqUnpacket(LinkedHashMap<String, Object> map) {
 		Map<String, Object> r = (Map<String, Object>) map.get("r");
 		if(r!=null) {
 			String nodesInfo = r.get("nodes").toString();

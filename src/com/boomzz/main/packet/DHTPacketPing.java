@@ -44,15 +44,12 @@ public class DHTPacketPing extends AbstractDHTPacket{
 	}
 
 	@Override
-	public Object unpacket(LinkedHashMap<String, Object> map) {
-		System.out.println("the node is good");
+	public Object reqUnpacket(LinkedHashMap<String, Object> map) {
+		System.out.println(map);
 		
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.boomzz.main.packet.AbstractDHTPacket#repPacket(java.lang.String[])
-	 */
 	@Override
 	public byte[] repPacket(String... param) {
 		// TODO Auto-generated method stub

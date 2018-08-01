@@ -23,7 +23,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 	}
 
 	@Override
-	public Object unpacket(LinkedHashMap<String, Object> map) {
+	public Object reqUnpacket(LinkedHashMap<String, Object> map) {
 		String y = (String) map.get("y");
 		if("e".equals(y)) {
 			System.out.println("ERROR:"+map.get("e"));

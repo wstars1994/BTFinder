@@ -18,7 +18,7 @@ public class DHTUtil {
     	if(stream!=null) {
     		LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();
     		AbstractBencode.decodeRouter(stream,map);
-    		abstractDHTPacket.unpacket(map);
+    		abstractDHTPacket.reqUnpacket(map);
     		return map;
     	}else {
     		MyLogger.log(DHTServerBoot.class,abstractDHTPacket.getClass().getSimpleName()+" - ERROR 请求无回应");

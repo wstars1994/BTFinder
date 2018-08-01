@@ -28,7 +28,7 @@ public class DHTAnnouncePeer extends AbstractDHTPacket {
 	}
 
 	@Override
-	public Object unpacket(LinkedHashMap<String, Object> map) {
+	public Object reqUnpacket(LinkedHashMap<String, Object> map) {
 		
 		System.out.println(map);
 		
