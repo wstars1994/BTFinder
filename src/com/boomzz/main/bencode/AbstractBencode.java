@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import com.boomzz.main.DHTUtil;
 import com.boomzz.main.StreamUtil;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
@@ -24,7 +25,16 @@ public abstract class AbstractBencode {
 	/**
 	 * 回应解码
 	 */
-	public void specialValueDecode(String key,ObjectBytesModel values) {
+	
+	public static void main(String[] args) {
+		
+		ObjectBytesModel bytesModel = new ObjectBytesModel(null, (DHTUtil.NODE_ID+"192.168.1.1198091").getBytes());
+		AbstractBencode.specialValueDecode("nodes", bytesModel);
+		System.out.println(bytesModel.getObject());
+	}
+	
+	
+	public static void specialValueDecode(String key,ObjectBytesModel values) {
 		if(values==null) return;
 		byte value[] = values.getBytes();
 		switch (key) {
@@ -45,7 +55,7 @@ public abstract class AbstractBencode {
 				values.setObject(ipString+":"+StreamUtil.bytesToInt(ports));
 				break;
 			case "id":
-				//一共26个字节 前20个为应答者nodeID后6位为应答者IPport
+				//nodeId
 				byte nodeIdBytes[] = Arrays.copyOfRange(value, 0, 20);
 				values.setObject(StreamUtil.bytesToHexString(nodeIdBytes).toString());
 				break;

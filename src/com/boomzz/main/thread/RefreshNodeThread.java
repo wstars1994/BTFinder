@@ -4,6 +4,6 @@
  */
 package com.boomzz.main.thread;
 
-public class RefreshBucketThread {
+public class RefreshNodeThread {
 
 }

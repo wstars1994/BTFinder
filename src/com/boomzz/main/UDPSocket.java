@@ -5,11 +5,12 @@ import java.io.PushbackInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketTimeoutException;
 import java.util.Arrays;
 
 public class UDPSocket {
 
-	public static PushbackInputStream request(String host,int port,byte[] requests) {
+	public synchronized static PushbackInputStream request(String host,int port,byte[] requests) {
 		DatagramSocket socket = null;
 		try {
 			socket = new DatagramSocket(8091);
@@ -24,7 +25,10 @@ public class UDPSocket {
             byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
             ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
             return new PushbackInputStream(byteArry);
+		}catch (SocketTimeoutException e) {
+			return null;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		} finally {
 			if(socket!=null) {
