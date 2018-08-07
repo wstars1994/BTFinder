@@ -22,18 +22,6 @@ public abstract class AbstractBencode {
 	
 	public abstract byte[] encode(Object object);
 	
-	/**
-	 * 回应解码
-	 */
-	
-	public static void main(String[] args) {
-		
-		ObjectBytesModel bytesModel = new ObjectBytesModel(null, (DHTUtil.NODE_ID+"192.168.1.1198091").getBytes());
-		AbstractBencode.specialValueDecode("nodes", bytesModel);
-		System.out.println(bytesModel.getObject());
-	}
-	
-	
 	public static void specialValueDecode(String key,ObjectBytesModel values) {
 		if(values==null) return;
 		byte value[] = values.getBytes();

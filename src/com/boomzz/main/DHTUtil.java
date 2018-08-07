@@ -21,7 +21,7 @@ public class DHTUtil {
     		abstractDHTPacket.reqUnpacket(map);
     		return map;
     	}else {
-    		MyLogger.log(DHTServerBoot.class,abstractDHTPacket.getClass().getSimpleName()+" - ERROR 请求无回应");
+    		MyLogger.log(DHTServerBoot.class,"× --- ["+url+":"+port+"]");
     	}
 		return null;
 	}

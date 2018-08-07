@@ -8,7 +8,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 import com.boomzz.main.db.DBUtil;
-import com.boomzz.main.thread.FindNodeThread;
+import com.boomzz.main.packet.DHTPacketFindNode;
 
 public class DHTServerBoot {
 
@@ -27,19 +27,16 @@ public class DHTServerBoot {
 		try {
 			DBUtil.init();
 			MyLogger.log(DHTServerBoot.class,"------------------------------------------------");
-			
-//			MyLogger.log(DHTServerBoot.class,"准备加入 : router.bittorrent.com");
-//			new FindNodeThread(DHTUtil.NODE_ID, "router.bittorrent.com", 6881).start();
-//			
-//			MyLogger.log(DHTServerBoot.class,"准备加入 : dht.transmissionbt.com");
-//			new FindNodeThread(DHTUtil.NODE_ID, "dht.transmissionbt.com", 6881).start();
-//			
+//			//target
+			MyLogger.log(DHTServerBoot.class,"准备加入 : router.bittorrent.com");
+			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "router.bittorrent.com", 6881);
+			MyLogger.log(DHTServerBoot.class,"准备加入 : dht.transmissionbt.com");
+			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "dht.transmissionbt.com", 6881);
 			MyLogger.log(DHTServerBoot.class,"准备加入 : router.utorrent.com");
-			new FindNodeThread(DHTUtil.NODE_ID, "router.utorrent.com", 6881).start();
+			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "router.utorrent.com", 6881);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-//		MyLogger.log(DHTServerBoot.class,"DHT服务开起,端口 : "+PORT_NUM);
 
 //		while (true) {
 //			try {

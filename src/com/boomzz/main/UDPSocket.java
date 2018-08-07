@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class UDPSocket {
 
-	public synchronized static PushbackInputStream request(String host,int port,byte[] requests) {
+	public static PushbackInputStream request(String host,int port,byte[] requests) {
 		DatagramSocket socket = null;
 		try {
 			socket = new DatagramSocket(8091);
