@@ -33,7 +33,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 				String ip = node.split("/")[1].split(":")[0];
 				int port = Integer.parseInt(node.split("/")[1].split(":")[1]);
 				try {
-					LinkedHashMap<String, Object> requestData = DHTUtil.requestData(new DHTPacketPing(),"1",ip, port);
+					LinkedHashMap<String, Object> requestData = DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
 					if(requestData!=null) {
 						DBUtil.execute("INSERT INTO BT_DHT_NODE(NODE_ID,NODE_IP,NODE_PORT) VALUES('"+nodeId+"','"+ip+"','"+port+"')");
 					}
