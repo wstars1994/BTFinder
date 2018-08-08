@@ -4,23 +4,14 @@
  */
 package com.boomzz.main;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.util.Properties;
 
 import com.boomzz.main.db.DBUtil;
 import com.boomzz.main.packet.DHTPacketFindNode;
 
 public class DHTClientBoot {
-
-    private final static int MAX_LENGTH = 1024; // 最大接收字节长度
-    private final static int PORT_NUM   = 8091;   // port号
-    private static byte[] receMsgs = new byte[MAX_LENGTH];
-    private static DatagramSocket datagramSocket;
-    private static DatagramPacket datagramPacket;
-	
     public static boolean isProduct = false;
-    
+
     public static void init() {
     	//日志格式
     	System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] %4$s: %5$s %n");
@@ -50,28 +41,5 @@ public class DHTClientBoot {
 			e1.printStackTrace();
 		}
 		MyLogger.log(DHTClientBoot.class,"----------------------OVER----------------------");
-//		while (true) {
-//			try {
-//				datagramSocket = new DatagramSocket(PORT_NUM);
-//				datagramSocket.setSoTimeout(30*60*1000);
-//				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
-//				datagramSocket.receive(datagramPacket);
-////				int i=data.length-1;
-////		        for(;i>0;i--) if(data[i]!=0) break;
-////		        byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
-////		        ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
-////		        LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();
-////				AbstractBencode.decodeRouter(PushbackInputStream(byteArry),map);
-//				MyLogger.log(DHTServerBoot.class,"DHT服务收到消息 : "+ new String(receMsgs));
-//			}catch (SocketTimeoutException e) {
-//				MyLogger.log(DHTServerBoot.class,"超时重新启动");
-//			}catch (Exception e) {
-//				e.printStackTrace();
-//			}finally {
-//				if (datagramSocket != null) {
-//					datagramSocket.close();
-//				}
-//			}
-//		}
 	}
 }
