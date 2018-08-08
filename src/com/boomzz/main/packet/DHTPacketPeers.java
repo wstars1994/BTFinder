@@ -3,27 +3,27 @@ package com.boomzz.main.packet;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.DHTConfig;
+import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 
 public class DHTPacketPeers extends AbstractDHTPacket{
 
 	@Override
-	public byte[] packet(String... param) {
+	public byte[] reqPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
 		map.put("q", "get_peers");
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
-		a.put("id", DHTConfig.NODE_ID);
+		a.put("id", DHTUtil.NODE_ID);
 		a.put("info_hash",param[0]);
 		map.put("a", a);
 		return AbstractBencode.encodeRouter(map);
 	}
 
 	@Override
-	public Object unpacket(LinkedHashMap<String, Object> map) {
+	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
 		String y = (String) map.get("y");
 		if("e".equals(y)) {
 			System.out.println("ERROR:"+map.get("e"));
@@ -40,8 +40,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			for(ObjectBytesModel obm : values) {
 				try {
 					String arr[] = obm.getObject().toString().split(":");
-					LinkedHashMap<String, Object> requestData = DHTConfig.requestData(new DHTAnnouncePeer(token), DHTConfig.TEST_INFO_HASH,arr[0],Integer.parseInt(arr[1]));
-					System.out.println(requestData);
+					DHTUtil.requestData(new DHTAnnouncePeer(token), DHTUtil.TEST_INFO_HASH,arr[0],Integer.parseInt(arr[1]));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,14 +53,21 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			
 			System.out.println(str.split("/")[1]);
 			try {
-				LinkedHashMap<String, Object> requestData = DHTConfig.requestData(new DHTPacketPeers(),DHTConfig.TEST_INFO_HASH,addr[0], Integer.parseInt(addr[1]));
-				if(requestData!=null)
-					System.out.println("request again : " + requestData);
+				DHTUtil.requestData(new DHTPacketPeers(),DHTUtil.TEST_INFO_HASH,addr[0], Integer.parseInt(addr[1]));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.boomzz.main.packet.AbstractDHTPacket#repPacket(java.lang.String[])
+	 */
+	@Override
+	public byte[] repPacket(String... param) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

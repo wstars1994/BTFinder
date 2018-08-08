@@ -18,20 +18,20 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.DHTConfig;
+import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTPacketPing extends AbstractDHTPacket{
 
 	@Override
-	public byte[] packet(String... param) {
+	public byte[] reqPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		if("1".equals(param[0])) {
 			map.put("y", "q");
 			map.put("q", "ping");
 			LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
-			a.put("id",DHTConfig.NODE_ID);
+			a.put("id",DHTUtil.NODE_ID);
 			map.put("a",a);
 		}else {
 			map.put("y", "e");
@@ -44,10 +44,22 @@ public class DHTPacketPing extends AbstractDHTPacket{
 	}
 
 	@Override
-	public Object unpacket(LinkedHashMap<String, Object> map) {
-		
+	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
+		System.out.println(map);
 		
 		return null;
+	}
+
+	@Override
+	public byte[] repPacket(String... param) {
+		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
+		map.put("ip", param[0]);
+		map.put("t", param[1]);
+		map.put("y", "r");
+		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
+		a.put("id",DHTUtil.NODE_ID);
+		map.put("r",a);
+		return AbstractBencode.encodeRouter(map);
 	}
 
 

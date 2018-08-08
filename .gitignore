@@ -2,3 +2,6 @@
 .settings
 *.bak
 .classpath
+*.log
+*.lck
+.project

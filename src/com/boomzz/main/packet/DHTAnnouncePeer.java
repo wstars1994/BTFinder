@@ -2,7 +2,7 @@ package com.boomzz.main.packet;
 
 import java.util.LinkedHashMap;
 
-import com.boomzz.main.DHTConfig;
+import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
 
 public class DHTAnnouncePeer extends AbstractDHTPacket {
@@ -13,13 +13,13 @@ public class DHTAnnouncePeer extends AbstractDHTPacket {
 	}
 
 	@Override
-	public byte[] packet(String... param) {
+	public byte[] reqPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
 		map.put("q", "announce_peer");
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
-		a.put("id", DHTConfig.NODE_ID);
+		a.put("id", DHTUtil.NODE_ID);
 		a.put("info_hash",param[0]);
 		a.put("token",token);
 		a.put("port",10756);
@@ -28,12 +28,17 @@ public class DHTAnnouncePeer extends AbstractDHTPacket {
 	}
 
 	@Override
-	public Object unpacket(LinkedHashMap<String, Object> map) {
+	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
 		
 		System.out.println(map);
 		
 		
 		
+		return null;
+	}
+
+	@Override
+	public byte[] repPacket(String... param) {
 		return null;
 	}
 
