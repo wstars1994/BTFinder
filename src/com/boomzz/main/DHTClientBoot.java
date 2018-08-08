@@ -28,6 +28,7 @@ public class DHTClientBoot {
     	//清除重复数据
     	delDuplicateNodeThread = new DelDuplicateNodeThread();
     	delDuplicateNodeThread.start();
+    	DHTUtil.NODE_ID = SHA1.getRandomNodeId();
     }
     
 	public static void main(String[] args) {
@@ -43,7 +44,7 @@ public class DHTClientBoot {
 				Map<String, Object> n = nodes.get(0);
 				String ip = n.get("ip").toString();
 				int port = Integer.parseInt(n.get("port").toString());
-				DHTUtil.requestData(new DHTPacketFindNode(),"5870e88713205585ff5c437f80ab54dbbc7a2e7d",ip, port);
+				DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
 				nodes = NodeMemory.getNodes();
 				nodes.remove(0);
 			}
