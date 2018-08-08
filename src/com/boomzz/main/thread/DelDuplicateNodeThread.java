@@ -29,7 +29,7 @@ public class DelDuplicateNodeThread extends Thread{
 						DBUtil.execute(delSql);
 					});
 				}
-				MyLogger.log(DelDuplicateNodeThread.class,"----------------------清除重复节点----------------------");
+				MyLogger.log(DHTClientBoot.class,"----------------------清除重复节点----------------------");
 				DelDuplicateNodeThread.currentThread().sleep(10*60*1000);
 			} catch (Exception e) {
 				e.printStackTrace();

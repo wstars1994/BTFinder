@@ -38,15 +38,14 @@ public class DHTClientBoot {
 			NodeMemory.addNode(null,"router.utorrent.com",6881);
 			NodeMemory.addNode(null,"router.bittorrent.com",6881);
 			List<Map<String, Object>> nodes = NodeMemory.getNodes();
-			int i=0;
 			while (true) {
-				Map<String, Object> n = nodes.get(i);
+				if(nodes.size()==0) break;
+				Map<String, Object> n = nodes.get(0);
 				String ip = n.get("ip").toString();
 				int port = Integer.parseInt(n.get("port").toString());
 				DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
 				nodes = NodeMemory.getNodes();
-				if(i>=nodes.size()-1) break;
-				i++;
+				nodes.remove(0);
 			}
 			MyLogger.log(DHTClientBoot.class,"----------------------OVER----------------------");
 			if(delDuplicateNodeThread!=null&&delDuplicateNodeThread.isAlive()) {
