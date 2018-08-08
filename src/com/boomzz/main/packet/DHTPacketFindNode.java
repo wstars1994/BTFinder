@@ -8,6 +8,7 @@ import com.boomzz.main.DHTUtil;
 import com.boomzz.main.MyLogger;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.db.DBUtil;
+import com.boomzz.main.memory.NodeMemory;
 
 public class DHTPacketFindNode extends AbstractDHTPacket {
 
@@ -37,7 +38,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 				String ip = node.split("/")[1].split(":")[0];
 				int port = Integer.parseInt(node.split("/")[1].split(":")[1]);
 				try {
-					DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
+					NodeMemory.addNode(nodeId,ip,port);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

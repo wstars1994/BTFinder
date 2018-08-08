@@ -30,6 +30,7 @@ public class DHTServerBoot {
     }
     
 	public static void main(String[] args) {
+		init();
 		MyLogger.log(DHTClientBoot.class,"----------------------服务开启----------------------");
 		while (true) {
 			try {

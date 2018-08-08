@@ -47,7 +47,7 @@ public class DBUtil {
 	}
 	
 	public static List<Map<String, Object>> search(String sql) {
-//		if(!DHTClientBoot.isProduct) return null;
+		if(!DHTClientBoot.isProduct) return null;
 		try {
 			List<Map<String, Object>> list = new ArrayList<>();
 			Connection connection = getConnection();

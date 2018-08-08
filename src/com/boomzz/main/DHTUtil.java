@@ -23,5 +23,4 @@ public class DHTUtil {
     		MyLogger.log(DHTClientBoot.class,"× --- ["+url+":"+port+"]");
     	}
 	}
-	
 }

@@ -6,45 +6,54 @@ package com.boomzz.main;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import com.boomzz.main.db.DBUtil;
+import com.boomzz.main.memory.NodeMemory;
+import com.boomzz.main.packet.DHTPacketFindNode;
+import com.boomzz.main.thread.DelDuplicateNodeThread;
 
 public class DHTClientBoot {
-	
     public static boolean isProduct = false;
-    
+    private static DelDuplicateNodeThread delDuplicateNodeThread = null;
     public static void init() {
-    	List<Map<String, Object>> search = DBUtil.search("select * from BT_DHT_NODE");
-    	if(search!=null) {
-    		System.out.println(search);
-    	}
-//    	//日志格式
-//    	System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] %4$s: %5$s %n");
-//    	//生产环境判断
-//    	Properties props=System.getProperties(); //获得系统属性集    
-//		String osName = props.getProperty("os.name"); //操作系统名称
-//		if(!osName.contains("Windows")) {
-//			isProduct = true;
-//		}
-//		//数据库初始化
-//    	DBUtil.init();
+    	//日志格式
+    	System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] %4$s: %5$s %n");
+    	//生产环境判断
+    	Properties props=System.getProperties(); //获得系统属性集    
+		String osName = props.getProperty("os.name"); //操作系统名称
+		if(!osName.contains("Windows")) isProduct = true;
+		//数据库初始化
+    	DBUtil.init();
+    	//清除重复数据
+    	delDuplicateNodeThread = new DelDuplicateNodeThread();
+    	delDuplicateNodeThread.start();
     }
     
 	public static void main(String[] args) {
-//		//join dht
 		try {
-			init();
-//			MyLogger.log(DHTClientBoot.class,"----------------------START----------------------");
-////			//target
-//			MyLogger.log(DHTClientBoot.class,"准备加入 : router.bittorrent.com");
-//			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "router.bittorrent.com", 6881);
-//			MyLogger.log(DHTClientBoot.class,"准备加入 : dht.transmissionbt.com");
-//			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "dht.transmissionbt.com", 6881);
-//			MyLogger.log(DHTClientBoot.class,"准备加入 : router.utorrent.com");
-//			DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID, "router.utorrent.com", 6881);
+			DHTClientBoot.init();
+			MyLogger.log(DHTClientBoot.class,"----------------------START----------------------");
+			NodeMemory.addNode(null,"dht.transmissionbt.com",6881);
+			NodeMemory.addNode(null,"router.utorrent.com",6881);
+			NodeMemory.addNode(null,"router.bittorrent.com",6881);
+			List<Map<String, Object>> nodes = NodeMemory.getNodes();
+			int i=0;
+			while (true) {
+				Map<String, Object> n = nodes.get(i);
+				String ip = n.get("ip").toString();
+				int port = Integer.parseInt(n.get("port").toString());
+				DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
+				nodes = NodeMemory.getNodes();
+				if(i>=nodes.size()-1) break;
+				i++;
+			}
+			MyLogger.log(DHTClientBoot.class,"----------------------OVER----------------------");
+			if(delDuplicateNodeThread!=null&&delDuplicateNodeThread.isAlive()) {
+				delDuplicateNodeThread.stop();
+			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		MyLogger.log(DHTClientBoot.class,"----------------------OVER----------------------");
 	}
 }

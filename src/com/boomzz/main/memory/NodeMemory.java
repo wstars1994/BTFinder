@@ -5,20 +5,23 @@
 package com.boomzz.main.memory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class NodeMemory {
 
-	private List<Map<String, Object>> nodes = new ArrayList<>();
+	private static List<Map<String, Object>> reqNodesQueue = new ArrayList<>();
 
-	public List<Map<String, Object>> getNodes() {
-		return nodes;
+	public static List<Map<String, Object>> getNodes() {
+		return reqNodesQueue;
 	}
 	
-	public List<Map<String, Object>> addNode(Map<String, Object> nodeMap) {
-		
-		
-		return nodes;
+	public static void addNode(String nodeId,String ip,int port) {
+		Map<String, Object> addNode = new HashMap();
+		addNode.put("ip",ip);
+		addNode.put("port",port);
+		addNode.put("nodeId",nodeId);
+		reqNodesQueue.add(addNode);
 	}
 }
