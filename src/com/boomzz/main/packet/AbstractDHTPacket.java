@@ -17,6 +17,6 @@ public abstract class AbstractDHTPacket {
 	/**
 	 * 解发送请求后响应的数据包
 	 */
-	public abstract Object reqUnpacket(LinkedHashMap<String, Object> map);
-	
+	public abstract Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort);
+
 }

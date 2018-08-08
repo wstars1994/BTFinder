@@ -12,18 +12,16 @@ public class DHTUtil {
 //	public static String NODE_ID = "2c3ed5ca8440d3d186850df7326f03af6c14fad0"; //sha1(wstars1995)
 	public static String TEST_INFO_HASH = "9C03E2FA8AC2F13BE279260A302DD49A63E031D9";
 	
-	public static LinkedHashMap<String, Object> requestData(AbstractDHTPacket abstractDHTPacket, String param,String url,int port) throws Exception{
+	public static void requestData(AbstractDHTPacket abstractDHTPacket, String param,String url,int port) throws Exception{
     	byte pac[] = abstractDHTPacket.reqPacket(param);
     	PushbackInputStream stream = UDPSocket.request(url, port, pac);
     	if(stream!=null) {
     		LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();
     		AbstractBencode.decodeRouter(stream,map);
-    		abstractDHTPacket.reqUnpacket(map);
-    		return map;
+    		abstractDHTPacket.reqUnpacket(map,url,port);
     	}else {
-    		MyLogger.log(DHTServerBoot.class,"× --- ["+url+":"+port+"]");
+    		MyLogger.log(DHTClientBoot.class,"× --- ["+url+":"+port+"]");
     	}
-		return null;
 	}
 	
 }

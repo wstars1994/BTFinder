@@ -20,7 +20,6 @@ public class MyLogger {
 	}
 	
 	public static Logger getLogger(Class clazz) throws Exception {
-		System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] %4$s: %5$s %n");
 		Logger logger = Logger.getLogger(clazz.getName());
 		if(fileHandler==null) {
 			fileHandler = new FileHandler("log.log",true);

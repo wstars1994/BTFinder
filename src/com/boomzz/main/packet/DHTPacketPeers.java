@@ -23,7 +23,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 	}
 
 	@Override
-	public Object reqUnpacket(LinkedHashMap<String, Object> map) {
+	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
 		String y = (String) map.get("y");
 		if("e".equals(y)) {
 			System.out.println("ERROR:"+map.get("e"));
@@ -40,8 +40,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			for(ObjectBytesModel obm : values) {
 				try {
 					String arr[] = obm.getObject().toString().split(":");
-					LinkedHashMap<String, Object> requestData = new DHTUtil().requestData(new DHTAnnouncePeer(token), DHTUtil.TEST_INFO_HASH,arr[0],Integer.parseInt(arr[1]));
-					System.out.println(requestData);
+					DHTUtil.requestData(new DHTAnnouncePeer(token), DHTUtil.TEST_INFO_HASH,arr[0],Integer.parseInt(arr[1]));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,9 +53,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			
 			System.out.println(str.split("/")[1]);
 			try {
-				LinkedHashMap<String, Object> requestData = new DHTUtil().requestData(new DHTPacketPeers(),DHTUtil.TEST_INFO_HASH,addr[0], Integer.parseInt(addr[1]));
-				if(requestData!=null)
-					System.out.println("request again : " + requestData);
+				DHTUtil.requestData(new DHTPacketPeers(),DHTUtil.TEST_INFO_HASH,addr[0], Integer.parseInt(addr[1]));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

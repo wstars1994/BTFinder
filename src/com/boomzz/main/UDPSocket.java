@@ -23,8 +23,7 @@ public class UDPSocket {
             int i=data.length-1;
             for(;i>0;i--) if(data[i]!=0) break;
             byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
-            ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
-            return new PushbackInputStream(byteArry);
+            return new PushbackInputStream(new ByteArrayInputStream(copyByte));
 		}catch (SocketTimeoutException e) {
 			return null;
 		} catch (Exception e) {

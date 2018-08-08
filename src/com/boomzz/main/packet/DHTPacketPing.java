@@ -44,7 +44,7 @@ public class DHTPacketPing extends AbstractDHTPacket{
 	}
 
 	@Override
-	public Object reqUnpacket(LinkedHashMap<String, Object> map) {
+	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
 		System.out.println(map);
 		
 		return null;

@@ -3,7 +3,9 @@ package com.boomzz.main.packet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.boomzz.main.DHTClientBoot;
 import com.boomzz.main.DHTUtil;
+import com.boomzz.main.MyLogger;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.db.DBUtil;
 
@@ -23,8 +25,10 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 	}
 
 	@Override
-	public Object reqUnpacket(LinkedHashMap<String, Object> map) {
+	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp,int oPort) {
 		Map<String, Object> r = (Map<String, Object>) map.get("r");
+		MyLogger.log(DHTClientBoot.class,"√ --- ["+oIp+":"+oPort+"] ");
+		DBUtil.execute("INSERT INTO BT_DHT_NODE(NODE_ID,NODE_IP,NODE_PORT) VALUES('"+r.get("id").toString()+"','"+oIp+"','"+oPort+"')");
 		if(r!=null) {
 			String nodesInfo = r.get("nodes").toString();
 			String nodeArr[] = nodesInfo.split("#");
@@ -33,10 +37,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 				String ip = node.split("/")[1].split(":")[0];
 				int port = Integer.parseInt(node.split("/")[1].split(":")[1]);
 				try {
-					LinkedHashMap<String, Object> requestData = DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
-					if(requestData!=null) {
-						DBUtil.execute("INSERT INTO BT_DHT_NODE(NODE_ID,NODE_IP,NODE_PORT) VALUES('"+nodeId+"','"+ip+"','"+port+"')");
-					}
+					DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
