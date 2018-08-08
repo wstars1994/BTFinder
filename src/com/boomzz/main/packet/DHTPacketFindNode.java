@@ -27,7 +27,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 	@Override
 	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp,int oPort) {
 		Map<String, Object> r = (Map<String, Object>) map.get("r");
-		MyLogger.log(DHTClientBoot.class,"√ --- ["+oIp+":"+oPort+"] ");
+		MyLogger.log(DHTClientBoot.class,"√ --- ["+oIp+":"+oPort+"] "+map.size());
 		DBUtil.execute("INSERT INTO BT_DHT_NODE(NODE_ID,NODE_IP,NODE_PORT) VALUES('"+r.get("id").toString()+"','"+oIp+"','"+oPort+"')");
 		if(r!=null) {
 			String nodesInfo = r.get("nodes").toString();
