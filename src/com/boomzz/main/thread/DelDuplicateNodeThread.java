@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.boomzz.main.DHTClientBoot;
-import com.boomzz.main.DHTUtil;
-import com.boomzz.main.MyLogger;
-import com.boomzz.main.SHA1;
 import com.boomzz.main.db.DBUtil;
+import com.boomzz.main.util.DHTUtil;
+import com.boomzz.main.util.MyLogger;
+import com.boomzz.main.util.SHA1;
 
 public class DelDuplicateNodeThread extends Thread{
 

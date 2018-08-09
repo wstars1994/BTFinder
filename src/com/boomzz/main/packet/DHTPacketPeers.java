@@ -3,9 +3,9 @@ package com.boomzz.main.packet;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
+import com.boomzz.main.util.DHTUtil;
 
 public class DHTPacketPeers extends AbstractDHTPacket{
 

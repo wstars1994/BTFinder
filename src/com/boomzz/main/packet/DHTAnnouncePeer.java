@@ -2,8 +2,8 @@ package com.boomzz.main.packet;
 
 import java.util.LinkedHashMap;
 
-import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
+import com.boomzz.main.util.DHTUtil;
 
 public class DHTAnnouncePeer extends AbstractDHTPacket {
 

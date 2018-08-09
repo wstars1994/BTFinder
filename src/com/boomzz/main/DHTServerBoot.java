@@ -6,6 +6,7 @@ import java.net.SocketTimeoutException;
 import java.util.Properties;
 
 import com.boomzz.main.db.DBUtil;
+import com.boomzz.main.util.MyLogger;
 
 public class DHTServerBoot {
 	private final static int MAX_LENGTH = 1024; // 最大接收字节长度

@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.DHTUtil;
 import com.boomzz.main.bencode.AbstractBencode;
+import com.boomzz.main.util.DHTUtil;
 
 public class DHTPacketPing extends AbstractDHTPacket{
 

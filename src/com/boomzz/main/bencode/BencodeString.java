@@ -5,8 +5,8 @@ import java.util.LinkedHashMap;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.boomzz.main.StreamUtil;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
+import com.boomzz.main.util.StreamUtil;
 
 public class BencodeString extends AbstractBencode {
 

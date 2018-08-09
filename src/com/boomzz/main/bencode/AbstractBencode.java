@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import com.boomzz.main.DHTUtil;
-import com.boomzz.main.StreamUtil;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
+import com.boomzz.main.util.DHTUtil;
+import com.boomzz.main.util.StreamUtil;
 
 /**
  * 将二进制解码
