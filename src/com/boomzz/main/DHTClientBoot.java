@@ -15,6 +15,7 @@ import com.boomzz.main.util.SHA1;
 public class DHTClientBoot {
     public static boolean isProduct = false;
     private static DelDuplicateNodeThread delDuplicateNodeThread = null;
+    
     public static void init() {
     	//日志格式
     	System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] %4$s: %5$s %n");
@@ -23,20 +24,21 @@ public class DHTClientBoot {
 		String osName = props.getProperty("os.name"); //操作系统名称
 		if(!osName.contains("Windows")) isProduct = true;
 		//数据库初始化
-    	DBUtil.init();
+    	DBUtil.dbInit();
     	//清除重复数据
     	delDuplicateNodeThread = new DelDuplicateNodeThread();
     	delDuplicateNodeThread.start();
     	DHTUtil.NODE_ID = SHA1.getRandomNodeId();
+    	//添加超级节点
+    	NodeMemory.addNode(null,"39.105.49.154",8091);
+    	NodeMemory.addNode(null,"router.utorrent.com",6881);
+    	NodeMemory.addNode(null,"router.bittorrent.com",6881);
     }
     
 	public static void main(String[] args) {
 		try {
 			DHTClientBoot.init();
 			MyLogger.log(DHTClientBoot.class,"----------------------START----------------------");
-			NodeMemory.addNode(null,"dht.transmissionbt.com",6881);
-			NodeMemory.addNode(null,"router.utorrent.com",6881);
-			NodeMemory.addNode(null,"router.bittorrent.com",6881);
 			List<Map<String, Object>> nodes = NodeMemory.getNodes();
 			while (true) {
 				if(nodes.size()==0) break;

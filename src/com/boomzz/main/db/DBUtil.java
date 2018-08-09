@@ -21,13 +21,12 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 public class DBUtil {
 
 	private static ComboPooledDataSource dataSource = new ComboPooledDataSource("mysql");
-	private static boolean isProduct = false;
-
+	
 	private static Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 	}
 
-	public static void init() {
+	public static void dbInit() {
 		if(!DHTClientBoot.isProduct) return;
 		//创建node记录表
 		String dhtNodeCreateSql = "CREATE TABLE IF NOT EXISTS BT_DHT_NODE ( ID INT (11) NOT NULL PRIMARY KEY AUTO_INCREMENT, NODE_ID VARCHAR (60) NOT NULL, NODE_IP VARCHAR (64) NOT NULL, NODE_PORT INT (5) NOT NULL, REQ_COUNT INT (1) DEFAULT 1 NOT NULL, LIFE_STATUS INT (1) DEFAULT 1 NOT NULL );";
@@ -100,5 +99,4 @@ public class DBUtil {
 			}
 		}
 	}
-
 }

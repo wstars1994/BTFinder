@@ -40,7 +40,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			for(ObjectBytesModel obm : values) {
 				try {
 					String arr[] = obm.getObject().toString().split(":");
-					DHTUtil.requestData(new DHTAnnouncePeer(token), DHTUtil.TEST_INFO_HASH,arr[0],Integer.parseInt(arr[1]));
+//					DHTUtil.requestData(new DHTAnnouncePeer(token), DHTUtil.TEST_INFO_HASH,arr[0],Integer.parseInt(arr[1]));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,7 +53,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 			
 			System.out.println(str.split("/")[1]);
 			try {
-				DHTUtil.requestData(new DHTPacketPeers(),DHTUtil.TEST_INFO_HASH,addr[0], Integer.parseInt(addr[1]));
+//				DHTUtil.requestData(new DHTPacketPeers(),DHTUtil.TEST_INFO_HASH,addr[0], Integer.parseInt(addr[1]));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -62,9 +62,6 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.boomzz.main.packet.AbstractDHTPacket#repPacket(java.lang.String[])
-	 */
 	@Override
 	public byte[] repPacket(String... param) {
 		// TODO Auto-generated method stub
