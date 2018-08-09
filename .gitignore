@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /bin
 .settings
 *.bak
@@ -7,12 +6,3 @@
 *.lck
 .project
 *.xml
-=======
-/bin
-.settings
-*.bak
-.classpath
-*.log
-*.lck
-.project
->>>>>>> 3f44617b652247268342488bc368fbaafaa288ac
