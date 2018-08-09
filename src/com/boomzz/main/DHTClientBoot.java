@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import com.boomzz.main.db.DBUtil;
 import com.boomzz.main.memory.NodeMemory;
 import com.boomzz.main.packet.DHTPacketFindNode;
 import com.boomzz.main.thread.DelDuplicateNodeThread;
+import com.boomzz.main.util.DBUtil;
 import com.boomzz.main.util.DHTUtil;
 import com.boomzz.main.util.MyLogger;
 import com.boomzz.main.util.SHA1;

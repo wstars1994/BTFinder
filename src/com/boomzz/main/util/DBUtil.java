@@ -2,7 +2,7 @@
  * author : 王新晨
  * date : 2018年8月1日 下午2:39:55
  */
-package com.boomzz.main.db;
+package com.boomzz.main.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

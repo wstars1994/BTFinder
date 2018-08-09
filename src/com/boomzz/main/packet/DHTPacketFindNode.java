@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.boomzz.main.DHTClientBoot;
 import com.boomzz.main.bencode.AbstractBencode;
-import com.boomzz.main.db.DBUtil;
 import com.boomzz.main.memory.NodeMemory;
+import com.boomzz.main.util.DBUtil;
 import com.boomzz.main.util.DHTUtil;
 import com.boomzz.main.util.MyLogger;
 

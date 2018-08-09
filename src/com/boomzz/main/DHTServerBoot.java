@@ -2,7 +2,7 @@ package com.boomzz.main;
 
 import java.util.Properties;
 
-import com.boomzz.main.db.DBUtil;
+import com.boomzz.main.util.DBUtil;
 import com.boomzz.main.util.MyLogger;
 import com.boomzz.main.util.UDPSocket;
 
