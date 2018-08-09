@@ -1,14 +1,12 @@
-/**
- * author : 王新晨
- * date : 2018年8月8日 下午12:08:37
- */
 package com.boomzz.main.thread;
 
 import java.util.List;
 import java.util.Map;
 
 import com.boomzz.main.DHTClientBoot;
+import com.boomzz.main.DHTUtil;
 import com.boomzz.main.MyLogger;
+import com.boomzz.main.SHA1;
 import com.boomzz.main.db.DBUtil;
 
 public class DelDuplicateNodeThread extends Thread{
@@ -29,7 +27,8 @@ public class DelDuplicateNodeThread extends Thread{
 						DBUtil.execute(delSql);
 					});
 				}
-				MyLogger.log(DHTClientBoot.class,"----------------------清除重复节点----------------------");
+				DHTUtil.NODE_ID = SHA1.getRandomNodeId();
+				MyLogger.log(DHTClientBoot.class,"----------------------清除重复节点,刷新NODEID----------------------");
 				DelDuplicateNodeThread.currentThread().sleep(10*60*1000);
 			} catch (Exception e) {
 				e.printStackTrace();

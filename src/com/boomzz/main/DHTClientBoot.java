@@ -1,7 +1,3 @@
-/**
- * author : 王新晨
- * date : 2018年7月31日 下午4:51:59
- */
 package com.boomzz.main;
 
 import java.util.List;
@@ -28,6 +24,7 @@ public class DHTClientBoot {
     	//清除重复数据
     	delDuplicateNodeThread = new DelDuplicateNodeThread();
     	delDuplicateNodeThread.start();
+    	DHTUtil.NODE_ID = SHA1.getRandomNodeId();
     }
     
 	public static void main(String[] args) {
