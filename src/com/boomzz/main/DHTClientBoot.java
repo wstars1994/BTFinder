@@ -31,8 +31,9 @@ public class DHTClientBoot {
     	DHTUtil.NODE_ID = SHA1.getRandomNodeId();
     	//添加超级节点
     	NodeMemory.addNode(null,"39.105.49.154",8091);
-    	NodeMemory.addNode(null,"router.utorrent.com",6881);
-    	NodeMemory.addNode(null,"router.bittorrent.com",6881);
+//    	NodeMemory.addNode(null,"dht.transmissionbt.com",6881);
+//    	NodeMemory.addNode(null,"router.utorrent.com",6881);
+//    	NodeMemory.addNode(null,"router.bittorrent.com",6881);
     }
     
 	public static void main(String[] args) {

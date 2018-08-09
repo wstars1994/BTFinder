@@ -19,7 +19,7 @@ public class UDPSocket {
 	public static PushbackInputStream request(String host,int port,byte[] requests) {
 		DatagramSocket socket = null;
 		try {
-			socket = new DatagramSocket(PORT_NUM);
+			socket = new DatagramSocket(8092);
 			socket.setSoTimeout(5000);
 			DatagramPacket request = new DatagramPacket(requests,requests.length,InetAddress.getByName(host),port);
 			socket.send(request);

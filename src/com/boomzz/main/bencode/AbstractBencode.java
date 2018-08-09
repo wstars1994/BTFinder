@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.boomzz.main.bencode.model.ObjectBytesModel;
-import com.boomzz.main.util.DHTUtil;
 import com.boomzz.main.util.StreamUtil;
 
 /**
@@ -42,6 +41,7 @@ public abstract class AbstractBencode {
 				ports[3]=port[1];
 				values.setObject(ipString+":"+StreamUtil.bytesToInt(ports));
 				break;
+			case "target":
 			case "id":
 				//nodeId
 				byte nodeIdBytes[] = Arrays.copyOfRange(value, 0, 20);
