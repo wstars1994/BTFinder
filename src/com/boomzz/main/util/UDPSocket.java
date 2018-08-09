@@ -25,10 +25,7 @@ public class UDPSocket {
 			socket.send(request);
             DatagramPacket response = new DatagramPacket(new byte[1024], 1024);
             socket.receive(response);
-            byte[] data = response.getData();
-            int i=data.length-1;
-            for(;i>0;i--) if(data[i]!=0) break;
-            byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
+            byte []copyByte = filter(response);
             return new PushbackInputStream(new ByteArrayInputStream(copyByte));
 		}catch (SocketTimeoutException e) {
 			return null;
@@ -52,13 +49,11 @@ public class UDPSocket {
 				datagramSocket.setSoTimeout(30*60*1000);
 				datagramPacket = new DatagramPacket(receMsgs, receMsgs.length);
 				datagramSocket.receive(datagramPacket);
-				byte[] data = datagramPacket.getData();
-				int i=data.length-1;
-		        for(;i>0;i--) if(data[i]!=0) break;
-		        byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
+				byte []copyByte = filter(datagramPacket);
 		        ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
 		        LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
 				AbstractBencode.decodeRouter(new PushbackInputStream(byteArry),map);
+				MyLogger.log(DHTServerBoot.class,"收到消息["+datagramPacket.getAddress()+":"+datagramPacket.getPort()+"] : "+map);
 				byte[] reponseData = DHTUtil.responseData(map);
 				if(reponseData!=null) {
 					DatagramPacket sendPacket = new DatagramPacket(reponseData, reponseData.length, datagramPacket.getAddress(), datagramPacket.getPort());
@@ -75,7 +70,7 @@ public class UDPSocket {
 			}
 		}
 	}
-	private byte[] filter(DatagramPacket datagramPacket) {
+	private static byte[] filter(DatagramPacket datagramPacket) {
 		byte[] data = datagramPacket.getData();
 		int i=data.length-1;
         for(;i>0;i--) if(data[i]!=0) break;
