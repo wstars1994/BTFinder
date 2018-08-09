@@ -53,8 +53,7 @@ public class DHTPacketPing extends AbstractDHTPacket{
 	@Override
 	public byte[] responsePacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
-		map.put("ip", param[0]);
-		map.put("t", param[1]);
+		map.put("t", param[0]);
 		map.put("y", "r");
 		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
 		a.put("id",DHTUtil.NODE_ID);

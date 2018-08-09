@@ -64,8 +64,15 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 
 	@Override
 	public byte[] responsePacket(String... param) {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+		map.put("t",param[0]);
+		map.put("y", "r");
+		LinkedHashMap<String, Object> a = new LinkedHashMap<>();
+		a.put("id",param[1]);
+		a.put("token","tokenabc");
+		a.put("nodes","asdasd");
+		map.put("r", a);
+		return AbstractBencode.encodeRouter(map);
 	}
 
 }

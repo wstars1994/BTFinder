@@ -5,10 +5,10 @@ import java.util.LinkedHashMap;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.util.DHTUtil;
 
-public class DHTAnnouncePeer extends AbstractDHTPacket {
+public class DHTPacketAnnouncePeer extends AbstractDHTPacket {
 
 	private Object token = null;
-	public DHTAnnouncePeer(Object token) {
+	public DHTPacketAnnouncePeer(Object token) {
 		this.token = token;
 	}
 
@@ -39,7 +39,13 @@ public class DHTAnnouncePeer extends AbstractDHTPacket {
 
 	@Override
 	public byte[] responsePacket(String... param) {
-		return null;
+		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
+		map.put("t", param[0]);
+		map.put("y", "r");
+		LinkedHashMap<String, Object> a  = new LinkedHashMap<>();
+		a.put("id",DHTUtil.NODE_ID);
+		map.put("r",a);
+		return AbstractBencode.encodeRouter(map);
 	}
 
 }

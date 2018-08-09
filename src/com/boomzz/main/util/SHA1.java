@@ -37,13 +37,13 @@ public class SHA1 {
 		}
 	}
 	
-	public static String getRandomNodeId() {
+	public static void getRandomNodeId() {
 		Random random = new Random();
 		String cString = "";
 		for(int i=0;i<20;i++) {
 			int nextInt = random.nextInt(255);
 			cString+=(char) nextInt;
 		}
-		return SHA1.encode(cString);
+		DHTUtil.NODE_ID = SHA1.encode(cString);
 	}
 }
