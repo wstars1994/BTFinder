@@ -61,7 +61,8 @@ public class UDPSocket {
 				AbstractBencode.decodeRouter(new PushbackInputStream(byteArry),map);
 				byte[] reponseData = DHTUtil.responseData(map);
 				if(reponseData!=null) {
-					datagramSocket.send(new DatagramPacket(reponseData, reponseData.length));
+					DatagramPacket sendPacket = new DatagramPacket(reponseData, reponseData.length, datagramPacket.getAddress(), datagramPacket.getPort());
+					datagramSocket.send(sendPacket);
 				}
 			}catch (SocketTimeoutException e) {
 				MyLogger.log(DHTServerBoot.class,"超时重新启动");
