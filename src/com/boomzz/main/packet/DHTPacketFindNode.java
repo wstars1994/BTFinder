@@ -13,7 +13,7 @@ import com.boomzz.main.util.MyLogger;
 public class DHTPacketFindNode extends AbstractDHTPacket {
 
 	@Override
-	public byte[] reqPacket(String... param) {
+	public byte[] requestPacket(String... param) {
 		LinkedHashMap<String, Object> map = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
@@ -26,7 +26,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 	}
 
 	@Override
-	public Object reqUnpacket(LinkedHashMap<String, Object> map, String oIp, int oPort) {
+	public Object requestUnpacket(LinkedHashMap<String, Object> map, String oIp, int oPort) {
 		try {
 			Map<String, Object> r = (Map<String, Object>) map.get("r");
 			MyLogger.log(DHTClientBoot.class, "√ --- [" + oIp + ":" + oPort + "] " + map.size());
@@ -48,8 +48,15 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 	}
 
 	@Override
-	public byte[] repPacket(String... param) {
-		return null;
+	public byte[] responsePacket(String... param) {
+		LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+		map.put("t",param[0]);
+		map.put("y", "r");
+		LinkedHashMap<String, Object> a = new LinkedHashMap<>();
+		a.put("id", DHTUtil.NODE_ID);
+		a.put("nodes","asdasd");
+		map.put("r", a);
+		return AbstractBencode.encodeRouter(map);
 	}
 
 }

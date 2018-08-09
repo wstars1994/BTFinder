@@ -3,7 +3,9 @@ package com.boomzz.main;
 import java.util.Properties;
 
 import com.boomzz.main.util.DBUtil;
+import com.boomzz.main.util.DHTUtil;
 import com.boomzz.main.util.MyLogger;
+import com.boomzz.main.util.SHA1;
 import com.boomzz.main.util.UDPSocket;
 
 public class DHTServerBoot {
@@ -20,6 +22,7 @@ public class DHTServerBoot {
 		}
 		//数据库初始化
     	DBUtil.dbInit();
+    	DHTUtil.NODE_ID = SHA1.getRandomNodeId();
     }
     
 	public static void main(String[] args) {

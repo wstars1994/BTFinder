@@ -24,7 +24,7 @@ import com.boomzz.main.util.DHTUtil;
 public class DHTPacketPing extends AbstractDHTPacket{
 
 	@Override
-	public byte[] reqPacket(String... param) {
+	public byte[] requestPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		if("1".equals(param[0])) {
@@ -44,14 +44,14 @@ public class DHTPacketPing extends AbstractDHTPacket{
 	}
 
 	@Override
-	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
+	public Object requestUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
 		System.out.println(map);
 		
 		return null;
 	}
 
 	@Override
-	public byte[] repPacket(String... param) {
+	public byte[] responsePacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("ip", param[0]);
 		map.put("t", param[1]);

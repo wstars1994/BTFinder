@@ -10,7 +10,7 @@ import com.boomzz.main.util.DHTUtil;
 public class DHTPacketPeers extends AbstractDHTPacket{
 
 	@Override
-	public byte[] reqPacket(String... param) {
+	public byte[] requestPacket(String... param) {
 		LinkedHashMap<String, Object> map  = new LinkedHashMap<>();
 		map.put("t", "bz");
 		map.put("y", "q");
@@ -23,7 +23,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 	}
 
 	@Override
-	public Object reqUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
+	public Object requestUnpacket(LinkedHashMap<String, Object> map,String oIp, int oPort) {
 		String y = (String) map.get("y");
 		if("e".equals(y)) {
 			System.out.println("ERROR:"+map.get("e"));
@@ -63,7 +63,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 	}
 
 	@Override
-	public byte[] repPacket(String... param) {
+	public byte[] responsePacket(String... param) {
 		// TODO Auto-generated method stub
 		return null;
 	}

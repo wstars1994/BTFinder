@@ -57,10 +57,12 @@ public class UDPSocket {
 		        for(;i>0;i--) if(data[i]!=0) break;
 		        byte[] copyByte = Arrays.copyOfRange(data, 0, i+1);
 		        ByteArrayInputStream byteArry = new ByteArrayInputStream(copyByte);
-		        LinkedHashMap<String, Object> map =new LinkedHashMap<String, Object>();
+		        LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
 				AbstractBencode.decodeRouter(new PushbackInputStream(byteArry),map);
-				
-				MyLogger.log(DHTServerBoot.class,"DHT服务收到消息 : "+ map);
+				byte[] reponseData = DHTUtil.responseData(map);
+				if(reponseData!=null) {
+					datagramSocket.send(new DatagramPacket(reponseData, reponseData.length));
+				}
 			}catch (SocketTimeoutException e) {
 				MyLogger.log(DHTServerBoot.class,"超时重新启动");
 			}catch (Exception e) {
@@ -71,5 +73,11 @@ public class UDPSocket {
 				}
 			}
 		}
+	}
+	private byte[] filter(DatagramPacket datagramPacket) {
+		byte[] data = datagramPacket.getData();
+		int i=data.length-1;
+        for(;i>0;i--) if(data[i]!=0) break;
+		return Arrays.copyOfRange(data, 0, i+1);
 	}
 }
