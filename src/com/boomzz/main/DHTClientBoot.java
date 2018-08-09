@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.boomzz.main.memory.NodeMemory;
-import com.boomzz.main.packet.DHTPacketFindNode;
+import com.boomzz.main.packet.DHTPacketPeers;
+import com.boomzz.main.packet.DHTPacketPing;
 import com.boomzz.main.thread.DelDuplicateNodeThread;
 import com.boomzz.main.util.DBUtil;
 import com.boomzz.main.util.DHTUtil;
@@ -46,7 +47,7 @@ public class DHTClientBoot {
 				String ip = n.get("ip").toString();
 				int port = Integer.parseInt(n.get("port").toString());
 				SHA1.getRandomNodeId();
-				DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
+				DHTUtil.requestData(new DHTPacketPeers(),"1qqqqqqqqqq",ip, port);
 				nodes = NodeMemory.getNodes();
 				nodes.remove(0);
 			}

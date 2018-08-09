@@ -110,4 +110,17 @@ public abstract class AbstractBencode {
 		}
 		return null;
 	}
+	
+	public static void main(String[] args) {
+		LinkedHashMap<String, Object> torrent = new LinkedHashMap<>();
+		torrent.put("announce", "http://saclass.com/img/summer-teacher-1.png");
+		LinkedHashMap<String, Object> info = new LinkedHashMap<>();
+		info.put("name", "saPic");
+		info.put("length", 160620);
+		info.put("piece length", 1024);
+		info.put("pieces","bd21a3e990af1b3f17cd837bca902b3b3358dc4c");
+		torrent.put("info", info);
+		byte[] encodeRouter = AbstractBencode.encodeRouter(torrent);
+		System.out.println(new String(encodeRouter));
+	}
 }
