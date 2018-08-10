@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.boomzz.main.DHTClientBoot;
+import com.boomzz.main.DHTServerBoot;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.memory.NodeMemory;
 import com.boomzz.main.util.DBUtil;
@@ -54,7 +55,7 @@ public class DHTPacketFindNode extends AbstractDHTPacket {
 		map.put("y", "r");
 		LinkedHashMap<String, Object> a = new LinkedHashMap<>();
 		a.put("id", DHTUtil.NODE_ID);
-		a.put("nodes","asdasd");
+		a.put("nodes",DHTServerBoot.randomKNode());
 		map.put("r", a);
 		return AbstractBencode.encodeRouter(map);
 	}

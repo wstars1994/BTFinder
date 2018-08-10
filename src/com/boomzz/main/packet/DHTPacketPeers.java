@@ -3,6 +3,7 @@ package com.boomzz.main.packet;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import com.boomzz.main.DHTServerBoot;
 import com.boomzz.main.bencode.AbstractBencode;
 import com.boomzz.main.bencode.model.ObjectBytesModel;
 import com.boomzz.main.util.DHTUtil;
@@ -70,7 +71,7 @@ public class DHTPacketPeers extends AbstractDHTPacket{
 		LinkedHashMap<String, Object> a = new LinkedHashMap<>();
 		a.put("id",param[1]);
 		a.put("token","tokenabc");
-		a.put("nodes","asdasd");
+		a.put("nodes",DHTServerBoot.randomKNode());
 		map.put("r", a);
 		return AbstractBencode.encodeRouter(map);
 	}

@@ -5,8 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.boomzz.main.memory.NodeMemory;
-import com.boomzz.main.packet.DHTPacketPeers;
-import com.boomzz.main.packet.DHTPacketPing;
+import com.boomzz.main.packet.DHTPacketFindNode;
 import com.boomzz.main.thread.DelDuplicateNodeThread;
 import com.boomzz.main.util.DBUtil;
 import com.boomzz.main.util.DHTUtil;
@@ -30,10 +29,10 @@ public class DHTClientBoot {
     	delDuplicateNodeThread = new DelDuplicateNodeThread();
     	delDuplicateNodeThread.start();
     	//添加超级节点
-    	NodeMemory.addNode(null,"39.105.49.154",8091);
-//    	NodeMemory.addNode(null,"dht.transmissionbt.com",6881);
-//    	NodeMemory.addNode(null,"router.utorrent.com",6881);
-//    	NodeMemory.addNode(null,"router.bittorrent.com",6881);
+//    	NodeMemory.addNode(null,"39.105.49.154",8091);
+    	NodeMemory.addNode(null,"dht.transmissionbt.com",6881);
+    	NodeMemory.addNode(null,"router.utorrent.com",6881);
+    	NodeMemory.addNode(null,"router.bittorrent.com",6881);
     }
     
 	public static void main(String[] args) {
@@ -47,7 +46,7 @@ public class DHTClientBoot {
 				String ip = n.get("ip").toString();
 				int port = Integer.parseInt(n.get("port").toString());
 				SHA1.getRandomNodeId();
-				DHTUtil.requestData(new DHTPacketPeers(),"1qqqqqqqqqq",ip, port);
+				DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
 				nodes = NodeMemory.getNodes();
 				nodes.remove(0);
 			}
