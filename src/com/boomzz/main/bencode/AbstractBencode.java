@@ -43,6 +43,7 @@ public abstract class AbstractBencode {
 				break;
 			case "target":
 			case "id":
+			case "info_hash":
 				//nodeId
 				byte nodeIdBytes[] = Arrays.copyOfRange(value, 0, 20);
 				values.setObject(StreamUtil.bytesToHexString(nodeIdBytes).toString());

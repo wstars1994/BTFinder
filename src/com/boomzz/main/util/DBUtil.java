@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.boomzz.main.DHTClientBoot;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class DBUtil {
@@ -27,14 +26,16 @@ public class DBUtil {
 	}
 
 	public static void dbInit() {
-		if(!DHTClientBoot.isProduct) return;
+		if(!DHTUtil.isProduct) return;
 		//创建node记录表
 		String dhtNodeCreateSql = "CREATE TABLE IF NOT EXISTS BT_DHT_NODE ( ID INT (11) NOT NULL PRIMARY KEY AUTO_INCREMENT, NODE_ID VARCHAR (60) NOT NULL, NODE_IP VARCHAR (64) NOT NULL, NODE_PORT INT (5) NOT NULL, REQ_COUNT INT (1) DEFAULT 1 NOT NULL, LIFE_STATUS INT (1) DEFAULT 1 NOT NULL );";
+		execute(dhtNodeCreateSql);
+		dhtNodeCreateSql = "CREATE TABLE IF NOT EXISTS BT_DHT_INFOHASH ( ID INT (11) NOT NULL PRIMARY KEY AUTO_INCREMENT, INFOHASH VARCHAR (60) NOT NULL);";
 		execute(dhtNodeCreateSql);
 	}
 	
 	public static void execute(String sql) {
-		if(!DHTClientBoot.isProduct) return;
+		if(!DHTUtil.isProduct) return;
 		try {
 			Connection connection = getConnection();
 			Statement createStatement = connection.createStatement();
@@ -46,7 +47,7 @@ public class DBUtil {
 	}
 	
 	public static List<Map<String, Object>> search(String sql) {
-		if(!DHTClientBoot.isProduct) return null;
+		if(!DHTUtil.isProduct) return null;
 		try {
 			List<Map<String, Object>> list = new ArrayList<>();
 			Connection connection = getConnection();
@@ -63,7 +64,7 @@ public class DBUtil {
 	        }
 	        close(connection,createStatement,null,null);
 	        return list;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;

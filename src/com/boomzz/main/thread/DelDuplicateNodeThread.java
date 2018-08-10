@@ -5,13 +5,14 @@ import java.util.Map;
 
 import com.boomzz.main.DHTClientBoot;
 import com.boomzz.main.util.DBUtil;
+import com.boomzz.main.util.DHTUtil;
 import com.boomzz.main.util.MyLogger;
 
 public class DelDuplicateNodeThread extends Thread{
 
 	@Override
 	public void run() {
-		if(!DHTClientBoot.isProduct) return;
+		if(!DHTUtil.isProduct) return;
 		while (true) {
 			try {
 				List<Map<String, Object>> search = DBUtil.search("select * from BT_DHT_NODE group by NODE_ID,NODE_IP,NODE_PORT HAVING COUNT(*)>1");

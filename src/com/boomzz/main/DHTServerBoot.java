@@ -6,12 +6,12 @@ import java.util.Properties;
 import java.util.Random;
 
 import com.boomzz.main.util.DBUtil;
+import com.boomzz.main.util.DHTUtil;
 import com.boomzz.main.util.MyLogger;
 import com.boomzz.main.util.SHA1;
 import com.boomzz.main.util.UDPSocket;
 
 public class DHTServerBoot {
-    public static boolean isProduct = false;
 
     public static List<Map<String,Object>> kNode = null;
     
@@ -22,7 +22,7 @@ public class DHTServerBoot {
     	Properties props=System.getProperties(); //获得系统属性集    
 		String osName = props.getProperty("os.name"); //操作系统名称
 		if(!osName.contains("Windows")) {
-			isProduct = true;
+			DHTUtil.isProduct = true;
 		}
 		//数据库初始化
     	DBUtil.dbInit();
@@ -45,7 +45,7 @@ public class DHTServerBoot {
     }
     
 	public static void main(String[] args) {
-		init();
+		DHTServerBoot.init();
 		MyLogger.log(DHTClientBoot.class,"----------------------服务开启----------------------");
 		UDPSocket.serverBootstrap();
 		MyLogger.log(DHTClientBoot.class,"----------------------服务关闭----------------------");

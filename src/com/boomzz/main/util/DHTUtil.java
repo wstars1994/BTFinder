@@ -14,6 +14,7 @@ import com.boomzz.main.packet.DHTPacketPing;
 
 public class DHTUtil {
 	
+	public static boolean isProduct = false;
 	public static String NODE_ID = null;
 	
 	public static void requestData(AbstractDHTPacket abstractDHTPacket, String param,String url,int port) throws Exception{
@@ -43,7 +44,9 @@ public class DHTUtil {
 				if("get_peers".equals(q.toString())) {
 					HashMap<String, Object> aMap = (HashMap<String, Object>) map.get("a");
 					if(aMap==null || aMap.get("id")==null || aMap.get("info_hash")==null) return null;
-					return new DHTPacketPeers().responsePacket(t.toString(),aMap.get("id").toString(),aMap.get("info_hash").toString());
+					String infoHash = aMap.get("info_hash").toString();
+					DBUtil.execute("INSERT INTO BT_DHT_INFOHASH(INFOHASH) VALUES('"+infoHash+"')");
+					return new DHTPacketPeers().responsePacket(t.toString(),aMap.get("id").toString());
 				}
 				if("announce_peer".equals(q.toString())) {
 					return new DHTPacketAnnouncePeer("tokenabc").responsePacket(t.toString());

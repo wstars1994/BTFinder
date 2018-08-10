@@ -5,7 +5,9 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.boomzz.main.memory.NodeMemory;
+import com.boomzz.main.packet.DHTPacketAnnouncePeer;
 import com.boomzz.main.packet.DHTPacketFindNode;
+import com.boomzz.main.packet.DHTPacketPeers;
 import com.boomzz.main.thread.DelDuplicateNodeThread;
 import com.boomzz.main.util.DBUtil;
 import com.boomzz.main.util.DHTUtil;
@@ -13,7 +15,6 @@ import com.boomzz.main.util.MyLogger;
 import com.boomzz.main.util.SHA1;
 
 public class DHTClientBoot {
-    public static boolean isProduct = false;
     private static DelDuplicateNodeThread delDuplicateNodeThread = null;
     
     public static void init() {
@@ -22,17 +23,17 @@ public class DHTClientBoot {
     	//生产环境判断
     	Properties props=System.getProperties(); //获得系统属性集    
 		String osName = props.getProperty("os.name"); //操作系统名称
-		if(!osName.contains("Windows")) isProduct = true;
+		if(!osName.contains("Windows")) DHTUtil.isProduct = true;
 		//数据库初始化
     	DBUtil.dbInit();
     	//清除重复数据
     	delDuplicateNodeThread = new DelDuplicateNodeThread();
     	delDuplicateNodeThread.start();
     	//添加超级节点
-//    	NodeMemory.addNode(null,"39.105.49.154",8091);
-    	NodeMemory.addNode(null,"dht.transmissionbt.com",6881);
-    	NodeMemory.addNode(null,"router.utorrent.com",6881);
-    	NodeMemory.addNode(null,"router.bittorrent.com",6881);
+    	NodeMemory.addNode(null,"39.105.49.154",8091);
+//    	NodeMemory.addNode(null,"dht.transmissionbt.com",6881);
+//    	NodeMemory.addNode(null,"router.utorrent.com",6881);
+//    	NodeMemory.addNode(null,"router.bittorrent.com",6881);
     }
     
 	public static void main(String[] args) {
@@ -46,7 +47,7 @@ public class DHTClientBoot {
 				String ip = n.get("ip").toString();
 				int port = Integer.parseInt(n.get("port").toString());
 				SHA1.getRandomNodeId();
-				DHTUtil.requestData(new DHTPacketFindNode(),DHTUtil.NODE_ID,ip, port);
+				DHTUtil.requestData(new DHTPacketAnnouncePeer("TOKENABC"),DHTUtil.NODE_ID,ip, port);
 				nodes = NodeMemory.getNodes();
 				nodes.remove(0);
 			}
